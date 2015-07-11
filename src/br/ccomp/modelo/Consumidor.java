@@ -2,6 +2,7 @@ package br.ccomp.modelo;
 
 public class Consumidor {
 
+	private Integer id;
 	private String nome;
 	private int matricula;
 	private int anoIngresso;
@@ -66,6 +67,12 @@ public class Consumidor {
 		Integer digito2 = calcularDigito(cpf.substring(0,9) + digito1, pesoCPF);
 		return cpf.equals(cpf.substring(0,9) + digito1.toString() + digito2.toString());
 	
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 

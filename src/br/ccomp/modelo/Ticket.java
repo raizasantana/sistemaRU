@@ -2,17 +2,12 @@ package br.ccomp.modelo;
 
 public class Ticket {
 	
-	private double valor;
+	private Integer id;
+	private Turno turno;
 	private Refeicao refeicao;
 	private Consumidor consumidor;
 	
 	
-	public double getValor() {
-		return valor;
-	}
-	public void setValor(double valor) {
-		this.valor = valor;
-	}
 	public Refeicao getRefeicao() {
 		return refeicao;
 	}
@@ -24,6 +19,18 @@ public class Ticket {
 	}
 	public void setConsumidor(Consumidor consumidor) {
 		this.consumidor = consumidor;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Turno getTurno() {
+		return turno;
+	}
+	public void setTurno(Turno turno) {
+		this.turno = turno;
 	}
 	
 	

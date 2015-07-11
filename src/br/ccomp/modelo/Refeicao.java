@@ -1,7 +1,8 @@
 package br.ccomp.modelo;
 
 public class Refeicao {
-
+	
+	private Integer id;
 	private TipoRefeicao tipo;
 	private Turno turno;
 	private String descrcicao;
@@ -30,6 +31,12 @@ public class Refeicao {
 	}
 	public void setOpcaoVegetariana(String opcaoVegetariana) {
 		this.opcaoVegetariana = opcaoVegetariana;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	

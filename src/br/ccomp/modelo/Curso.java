@@ -2,6 +2,7 @@ package br.ccomp.modelo;
 
 public class Curso {
 
+	private Integer id;
 	private String nome;
 	private String sigla;
 	private Departamento departamento;
@@ -24,6 +25,12 @@ public class Curso {
 	}
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	
