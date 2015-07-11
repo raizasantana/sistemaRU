@@ -5,21 +5,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.ccomp.modelo.Curso;
+import br.ccomp.modelo.Ticket;
 
-public class CursoGateway {
-
+public class TicketGateway {
 Connection con = ConnectionFactory.getConnection();
 	
-	public void insert(Curso curso){
-		String sql = "INSERT INTO curso" +
-				"VALUES (?,?,?)";
+	public void insert(Ticket ticket){
+		String sql = "INSERT INTO ticket" +
+				"VALUES (?,?,?,?)";
 		
 		try {
 			PreparedStatement prst = con.prepareStatement(sql);
-			prst.setString(1, curso.getNome());
-			prst.setString(2, curso.getSigla());
-			prst.setInt(3, curso.getDepartamento().getId());
+			prst.setInt(1, ticket.getConsumidor().getId());
+			prst.setFloat(2, ticket.getValor());
+			prst.setInt(3, ticket.getRefeicao().getId());
+			prst.setBoolean(4, ticket.isPago());
 			
 			ResultSet rs = prst.executeQuery();
 			
@@ -31,12 +31,12 @@ Connection con = ConnectionFactory.getConnection();
 			
 	}
 	
-	public void delete(Integer idCurso) throws SQLException{
-		String sql = "DELETE FROM curso" +
+	public void delete(Integer idTicket) throws SQLException{
+		String sql = "DELETE FROM ticket" +
 				"WHERE id = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
-		prst.setInt(1, idCurso);
+		prst.setInt(1, idTicket);
 		
 		ResultSet rs = prst.executeQuery();
 		
@@ -45,7 +45,7 @@ Connection con = ConnectionFactory.getConnection();
 	}
 	
 	public ResultSet findAll() throws SQLException{
-		String sql = "SELECT * FROM curso";
+		String sql = "SELECT * FROM ticket";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
 		
@@ -56,7 +56,7 @@ Connection con = ConnectionFactory.getConnection();
 	}
 
 	public ResultSet find(Integer id) throws SQLException{
-		String sql = "SELECT * FROM curso" +
+		String sql = "SELECT * FROM ticket" +
 				"WHERE id = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);

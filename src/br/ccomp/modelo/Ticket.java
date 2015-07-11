@@ -3,9 +3,10 @@ package br.ccomp.modelo;
 public class Ticket {
 	
 	private Integer id;
-	private Turno turno;
+	private float valor;
 	private Refeicao refeicao;
 	private Consumidor consumidor;
+	private boolean pago;
 	
 	
 	public Refeicao getRefeicao() {
@@ -26,13 +27,17 @@ public class Ticket {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Turno getTurno() {
-		return turno;
+	public float getValor() {
+		return valor;
 	}
-	public void setTurno(Turno turno) {
-		this.turno = turno;
+	public void setValor(float valor) {
+		this.valor = valor;
 	}
-	
-	
+	public boolean isPago() {
+		return pago;
+	}
+	public void setPago(boolean pago) {
+		this.pago = pago;
+	}	
 
 }
