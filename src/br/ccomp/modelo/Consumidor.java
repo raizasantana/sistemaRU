@@ -75,6 +75,9 @@ public class Consumidor {
 		this.id = id;
 	}
 
-
+	public float getPreco(Turno t)
+	{
+		return 0;
+	}
 
 }

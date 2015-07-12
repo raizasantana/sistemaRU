@@ -12,6 +12,13 @@ public class Aluno extends Consumidor{
 		this.curso = curso;
 	}
 	
+	@Override
+	public float getPreco(Turno t)
+	{
+		if(t.equals(Turno.MANHA))
+			return (float) 0.5;
+		else return (float) 1.0;
+	}
 	
 
 }

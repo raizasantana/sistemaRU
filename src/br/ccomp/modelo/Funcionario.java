@@ -12,5 +12,14 @@ public class Funcionario extends Consumidor{
 		this.departamento = departamento;
 	}
 	
+	@Override
+	public float getPreco(Turno t)
+	{
+		if(t.equals(Turno.MANHA))
+			return (float) 3.0;
+		else return (float) 6.0;
+		
+	}
+	
 	
 }
