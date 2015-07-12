@@ -9,10 +9,10 @@ import br.ccomp.modelo.Curso;
 
 public class CursoGateway {
 
-Connection con = ConnectionFactory.getConnection();
+	Connection con = ConnectionFactory.getConnection();
 	
 	public void insert(Curso curso){
-		String sql = "INSERT INTO curso" +
+		String sql = "INSERT INTO curso(nome, sigla, id_departamento)" +
 				"VALUES (?,?,?)";
 		
 		try {
@@ -21,7 +21,7 @@ Connection con = ConnectionFactory.getConnection();
 			prst.setString(2, curso.getSigla());
 			prst.setInt(3, curso.getDepartamento().getId());
 			
-			ResultSet rs = prst.executeQuery();
+			prst.executeUpdate();
 			
 			prst.close();
 		} catch (SQLException e) {
@@ -65,5 +65,27 @@ Connection con = ConnectionFactory.getConnection();
 		
 		prst.close();
 		return rs;
+	}
+	
+	//TODO Identificar pq o executeQuery diz que a sintax ta errada e fazer o select funcionar
+	public boolean find(String sigla) throws SQLException{
+		String sql = "SELECT * FROM curso " +
+				"WHERE sigla = ?";
+		
+		PreparedStatement prst = con.prepareStatement(sql);
+		prst.setString(1, sigla);
+		
+		ResultSet rs = prst.executeQuery();
+		
+		boolean achou = false;
+		
+		if(rs.next())
+			achou = true;
+		
+		prst.close();
+		//con.close();
+		rs.close();
+		
+		return achou;
 	}
 }
