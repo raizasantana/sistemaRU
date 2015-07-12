@@ -6,6 +6,19 @@ public class Departamento {
 	private String nome;
 	private String sigla;
 	
+	public Departamento(){
+		
+	}
+	
+	public Departamento(int id){
+		this.id = id;
+	}
+	
+	public Departamento(int id, String nome, String sigla){
+		this.id = id;
+		this.nome = nome;
+		this.sigla = sigla;
+	}
 	
 	public String getNome() {
 		return nome;
