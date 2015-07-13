@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import br.ccomp.modelo.Curso;
 import br.ccomp.modelo.Departamento;
 
 public class DepartamentoGateway {
@@ -43,15 +45,31 @@ public class DepartamentoGateway {
 		
 	}
 	
-	public ResultSet findAll() throws SQLException{
-		String sql = "SELECT * FROM departamento";
+	public ArrayList<Departamento> findAll() throws SQLException{
+		ArrayList<Departamento> departamentos = new ArrayList<Departamento>();
+		Connection conn = null;
 		
-		PreparedStatement prst = con.prepareStatement(sql);
+		String sql = "SELECT * FROM DEPARTAMENTO";
 		
-		ResultSet rs = prst.executeQuery();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = ConnectionFactory.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()){
+				departamentos.add(new br.ccomp.modelo.Departamento(
+						rs.getInt("DEPARTAMENTO.ID"),
+						rs.getString("DEPARTAMENTO.NOME"),
+						rs.getString("DEPARTAMENTO.SIGLA")));
+			}
+			
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		
-		prst.close();
-		return rs;
+		return departamentos;
 	}
 
 	public ResultSet find(Integer id) throws SQLException{

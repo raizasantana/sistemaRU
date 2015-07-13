@@ -5,13 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
 <title>Lista de cursos</title>
 </head>
 <body>
 	<form action="curso" method="post">
 		<input type="submit" name="acao" value="Listar"></br>
-		<div id="listarCursos">
+		<div id="listarCursos" name="acao" value="Listar">
 			<table border="0">
+			
 				<c:if test="${cursos!=null}">
 					<c:forEach var="curso" items="${cursos}">
 						<tr>
@@ -27,6 +30,7 @@
 						</tr>
 					</c:forEach>
 				</c:if>
+				
 			</table>
 		</div>
 	</form>
