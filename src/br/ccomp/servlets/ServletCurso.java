@@ -1,6 +1,7 @@
 package br.ccomp.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +27,9 @@ public class ServletCurso extends HttpServlet{
 				break;
 			case "Editar":
 				editarCurso(request, response);
+				break;
+			case "Listar":
+				listarCurso(request, response);
 				break;
 			default:
 				break;
@@ -59,11 +63,23 @@ public class ServletCurso extends HttpServlet{
 	private void editarCurso(HttpServletRequest request, HttpServletResponse response){
 		
 		try {
-			request.getRequestDispatcher("/listarCurso.jsp").forward(request, response);
+			request.getRequestDispatcher("/editarCurso.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 
+	private void listarCurso(HttpServletRequest request, HttpServletResponse response){
+		TransactionScriptCurso transactionScriptCurso = new TransactionScriptCurso();
+		
+		ArrayList<Curso> cursos = transactionScriptCurso.listarCurso();
+		request.setAttribute("cursos", cursos);
+		
+		try {
+			request.getRequestDispatcher("/listarCurso.jsp").forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

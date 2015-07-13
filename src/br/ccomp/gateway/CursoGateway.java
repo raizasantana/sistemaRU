@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import br.ccomp.modelo.Curso;
 
@@ -44,15 +45,36 @@ public class CursoGateway {
 		
 	}
 	
-	public ResultSet findAll() throws SQLException{
-		String sql = "SELECT * FROM curso";
+	public ArrayList<Curso> findAll() throws SQLException{
+		ArrayList<Curso> cursos = new ArrayList<Curso>();
+		Connection conn = null;
 		
-		PreparedStatement prst = con.prepareStatement(sql);
+		String sql = "SELECT * FROM CURSO JOIN DEPARTAMENTO ON CURSO.ID_DEPARTAMENTO = DEPARTAMENTO.ID";
 		
-		ResultSet rs = prst.executeQuery();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = ConnectionFactory.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()){
+				Curso c = new Curso(
+						rs.getInt("CURSO.ID"),
+						rs.getString("CURSO.NOME"),
+						rs.getString("CURSO.SIGLA"),
+						new br.ccomp.modelo.Departamento(
+								rs.getInt("DEPARTAMENTO.ID"),
+								rs.getString("DEPARTAMENTO.NOME"),
+								rs.getString("DEPARTAMENTO.SIGLA")));
+				cursos.add(c);
+			}
+			
+			conn.close();
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		
-		prst.close();
-		return rs;
+		return cursos;
 	}
 
 	public ResultSet find(Integer id) throws SQLException{

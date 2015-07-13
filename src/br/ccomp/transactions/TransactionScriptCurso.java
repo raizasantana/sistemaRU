@@ -2,6 +2,8 @@ package br.ccomp.transactions;
 
 import java.io.Console;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import br.ccomp.gateway.CursoGateway;
 import br.ccomp.modelo.Curso;
@@ -36,5 +38,23 @@ public class TransactionScriptCurso {
 //			e.printStackTrace();
 //		}
 //		return false;
+	}
+	
+	public boolean deletarCurso(int id){
+		//return cursoGateway.delete(id);
+		return false;
+	}
+	
+	public ArrayList<Curso> listarCurso(){
+		ArrayList<Curso> cursos = new ArrayList<Curso>();
+		//TODO descomentar
+		try {
+			cursos = cursoGateway.findAll();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return cursos;
 	}
 }
