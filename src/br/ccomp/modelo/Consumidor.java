@@ -2,6 +2,7 @@ package br.ccomp.modelo;
 
 public class Consumidor {
 
+	private Integer id;
 	private String nome;
 	private int matricula;
 	private int anoIngresso;
@@ -9,6 +10,28 @@ public class Consumidor {
 	private Titulo titulo;
 	private String cpf;
 
+	public Consumidor(int id, String nome, int matricula, int anoIngresso, Sexo sexo, Titulo titulo, String cpf) {
+		this.id = id;
+		this.nome = nome;
+		this.matricula = matricula;
+		this.anoIngresso = anoIngresso;
+		this.sexo = sexo;
+		this.titulo = titulo;
+		this.cpf = cpf;
+	}
+	
+	public Consumidor(){
+		
+	}
+	
+	public Consumidor(int id, int matricula){
+		this.id = id;
+		this.matricula = matricula;
+	}
+	
+	public Consumidor(int matricula) {
+		this.matricula = matricula;
+	}
 
 	public String getNome() {
 		return nome;
@@ -66,6 +89,17 @@ public class Consumidor {
 		Integer digito2 = calcularDigito(cpf.substring(0,9) + digito1, pesoCPF);
 		return cpf.equals(cpf.substring(0,9) + digito1.toString() + digito2.toString());
 	
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	
+	public float getPreco(Turno t)
+	{
+		return 0;
 	}
 
 
