@@ -9,19 +9,16 @@
 <title>Criar Refeicao</title>
 </head>
 <body>
-	<form action="Refeicao" method='post'>
-		<table>
+	<form action="refeicao" method='post'>
+		<table class="TableForm">
 			<input type="text" id="id" name="id" value="${refeicao_id}" style="display:none">
 			<tr>
 			<td>Descrição:</td><td><input type="text" id="descricao" name="descricao" value="${refeicao_descricao}"></td>
-			</tr>
-			<tr>
+			</tr><tr>
 			<td>Opção Vegetariana:</td><td><input type="text" id="opVegan" name="opVegan" value="${refeicao_opVegan}"></td>
-			</tr>
-			<tr>
+			</tr><tr>
 			<td>Tipo:</td><td><input type="text" id="turno" name="tipo" value="${refeicao_tipo}" disabled></td>
-			</tr>
-			<tr>
+			</tr><tr>
 			<td>Turno:</td><td><input type="text" id="turno" name="turno" value="${refeicao_turno}" disabled></td>
 			</tr>
 		</table>

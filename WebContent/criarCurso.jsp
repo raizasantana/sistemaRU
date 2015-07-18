@@ -9,13 +9,16 @@
 </head>
 <body>
 	<form action="curso" method='post'>
-		<table>
+		<table class="TableForm">
 			<input type="text" id="id" name="id" value="${curso_id}" style="display:none">
 			<tr>
 				<td>Nome:</td><td><input type="text" id="nome" name="nome"></td>
 			</tr>
 			<tr>
 				<td>Sigla:</td><td><input type="text" id="sigla" name="sigla"></td>
+			</tr>
+			<tr>
+			<td colspan=2>Departamento:</td>
 			</tr>
 			<tr><td colspan=2>
 			<select id="departamentos" name="departamentos">

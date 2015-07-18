@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form id="form" action="curso" method='post'>
-		<table>
+		<table class="TableForm">
 			<input type="text" id="id" name="id" value="${curso_id}" style="display:none">
 			<tr>
 				<td>Nome:</td><td><input type="text" id="nome" name="nome" value="${curso_nome}"></td>

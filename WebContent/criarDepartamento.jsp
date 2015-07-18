@@ -7,7 +7,7 @@
 </head>
 <body>
 	<form action="departamento" method='post'>
-	<table>
+	<table class="TableForm">
 		<tr>
 			<td>Nome:</td><td><input type="text" id="nome" name="nome"></td>
 		</tr>

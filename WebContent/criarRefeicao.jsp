@@ -5,27 +5,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Criar Refeicao</title>
 </head>
 <body>
-	<form action="Refeicao" method='post'>
-		<table>
+	<form action="refeicao" method='post'>
+		<table class="TableForm">
 			<tr>
 				<td>Descrição:</td><td><input type="text" id="descricao" name="descricao"></td>
-			</tr>
-			<tr>
+			</tr><tr>
 				<td>Opção Vegetariana:</td><td><input type="text" id="opVegan" name="opcao_vegetariana"></td>
-			</tr>
-			<tr>
+			</tr><tr>
 			<td>Tipo:</td> 
 				<td><select id="tipo" name="tipos">
 					<c:forEach var="tipo" items="${tipos}">
 						<option value="${ tipo }"  > ${tipo}</option>
 					</c:forEach>
 				</select></td>
-			</tr>
-			<tr>
+			</tr><tr>
 			<td>Turno:</td>
 				<td><select id="turnos" name="turnos">
 					<c:forEach var="turno" items="${turnos}">

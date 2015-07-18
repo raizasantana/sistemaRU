@@ -8,9 +8,7 @@
 </head>
 <body>
 	<c:if test="${consumidores!=null}">
-		
-		<p>
-			Alunos
+			<h3>Alunos</h3>
 			<table class='CSSTableGenerator'>
 				<tr>
 					<td>Nome</td>
@@ -34,10 +32,8 @@
 					</c:choose>
 				</c:forEach>
 			</table>
-		</p>
-		
-		<p>
-			Funcionários
+			
+			<h3>Funcionários</h3>
 			<table class='CSSTableGenerator'>
 				<tr>
 					<td>Nome</td>
@@ -61,7 +57,6 @@
 					</c:choose>
 				</c:forEach>
 			</table>
-		</p>
 		<br/>
 		<center><a data-target="#conteudo" class="button" href="consumidor?acao=listarCurso">Novo</a><center>
 	</c:if>

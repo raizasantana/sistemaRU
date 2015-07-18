@@ -36,7 +36,7 @@ public class ServletRefeicao extends HttpServlet{
 			case "Listar":
 				listarRefeicao(request, response);
 				break;
-			case "Salvar":
+			case "Alterar":
 				salvarRefeicao(request, response);
 				break;
 			default:
@@ -61,7 +61,7 @@ public class ServletRefeicao extends HttpServlet{
 			case "Listar":
 				listarRefeicao(request, response);
 				break;
-			case "Salvar":
+			case "Alterar":
 				salvarRefeicao(request, response);
 				break;
 			default:
