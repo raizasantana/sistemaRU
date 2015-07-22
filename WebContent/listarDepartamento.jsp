@@ -13,14 +13,14 @@
 				<tr>
 					<td>Nome</td>
 					<td>Sigla</td>
-					<!-- <td>Ação</td> -->
+					<td>Ação</td>
 				</tr>
 				<c:if test="${departamentos!=null}">
 					<c:forEach var="departamento" items="${departamentos}">
 						<tr>
 							<td> ${departamento.nome} </td>
 							<td> ${departamento.sigla} </td>
-							<!-- <td><center><a data-target="#conteudo" class="button" href="departamento?acao=Editar&id=${departamento.id}">Editar</a><center></center></td> -->
+							<td><center><a data-target="#conteudo" class="button" href="departamento?acao=Editar&id=${departamento.id}">Editar</a></center></td>
 						</tr>
 						
 					</c:forEach>
@@ -28,7 +28,7 @@
 				
 			</table>
 			<br/>
-			<center><a data-target="#conteudo" class="button" href="departamento?acao=preparaCriar">Novo</a><center>
+			<center><a data-target="#conteudo" class="button" href="criarDepartamento.jsp">Novo</a><center>
 		</div>
 	</form>
 	

@@ -12,7 +12,7 @@ public class ConnectionFactory {
    
             String url = "jdbc:mysql://localhost:3306/bandejao";  
             String username = "root";   
-            String password = "";  
+            String password = "root";  
               
             return DriverManager.getConnection(url, username, password);    
         } catch (SQLException e) {  

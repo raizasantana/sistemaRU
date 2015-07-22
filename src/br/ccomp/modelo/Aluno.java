@@ -3,7 +3,10 @@ package br.ccomp.modelo;
 public class Aluno extends Consumidor{
 	
 	public Aluno(){
-		
+	}
+	
+	public Aluno(int id, int matricula){
+		super(id, matricula);
 	}
 
 	private Curso curso;
@@ -16,13 +19,6 @@ public class Aluno extends Consumidor{
 		this.curso = curso;
 	}
 	
-	@Override
-	public float getPreco(Turno t)
-	{
-		if(t.equals(Turno.MANHA.getNome()))
-			return (float) 0.5;
-		else return (float) 1.0;
-	}
 	
 
 }

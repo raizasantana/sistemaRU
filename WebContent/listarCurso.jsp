@@ -23,7 +23,7 @@
 						<td> ${curso.sigla} </td>
 						<td> ${curso.departamento.nome} </td>
 						<td> ${curso.departamento.sigla} </td>
-						<td><center><a data-target="#conteudo" class="button" href="curso?acao=Editar&id=${curso.id}">Editar</a><center></td>
+						<td><center><a data-target="#conteudo" class="button" href="curso?acao=Editar&id=${curso.id}">Editar</a></center></td>
 					</tr>
 					
 				</c:forEach>

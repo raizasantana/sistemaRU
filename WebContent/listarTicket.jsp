@@ -15,6 +15,8 @@
 					<td>Turno</td>
 					<td>Refeição</td>
 					<td>Valor</td>
+					<td>Pago</td>
+					<td>Ação</td>
 				</tr>
 				<c:if test="${tickets!=null}">
 					<c:forEach var="ticket" items="${tickets}">
@@ -23,6 +25,15 @@
 							<td> ${ticket.refeicao.turno} </td>
 							<td> ${ticket.refeicao.descricao} </td>
 							<td>R$ ${ticket.valor} </td>
+							<c:choose>
+								<c:when test="${ticket.pago}">
+									<td>SIM</td>
+								</c:when>
+								<c:otherwise>
+									<td>NÃO</td>
+								</c:otherwise>
+							</c:choose>
+							<td><center><a data-target="#conteudo" class="button" href="ticket?acao=Editar&id=${ticket.id}">Editar</a></center></td>
 						</tr>
 						
 					</c:forEach>
@@ -33,7 +44,9 @@
 			<center><a data-target="#conteudo" class="button" href="ticket?acao=carregarCriarTicket">Novo</a><center>
 		</div>
 	</form>
-	
+	<c:if test="${response != null}">
+		<h1>${response}</h1>
+	</c:if>
 	<c:if test="${response != null}">
 		<c:redirect url="index.jsp#redir=ticket&message=${response}"/>
 	</c:if>

@@ -16,17 +16,19 @@
 					<td>Ano de ingresso</td>
 					<td>CPF</td>
 					<td>Curso</td>
+					<td>Ação</td>
 				</tr>
 	
 				<c:forEach var="cons" items="${consumidores}">
 					<c:choose>
 					<c:when test="${ cons.getClass().name == 'br.ccomp.modelo.Aluno' }">
 						<tr>
-							<td>${cons.nome }</td>
-							<td>${cons.matricula }</td>
-							<td>${cons.anoIngresso }</td>
-							<td>${cons.cpf}</td>
-							<td>${cons.curso.sigla}</td>
+							<td style="width: 30%">${cons.nome }</td>
+							<td style="width: 10%">${cons.matricula }</td>
+							<td style="width: 20%">${cons.anoIngresso }</td>
+							<td style="width: 15%">${cons.cpf}</td>
+							<td style="width: 10%">${cons.curso.sigla}</td>
+							<td style="width: 15%"><center><a data-target="#conteudo" class="button" href="consumidor?acao=Editar&id=${cons.id}">Editar</a></center></td>
 						</tr>
 					</c:when>
 					</c:choose>
@@ -41,17 +43,19 @@
 					<td>Ano de ingresso</td>
 					<td>CPF</td>
 					<td>Departamento</td>
+					<td>Ação</td>
 				</tr>
 	
 				<c:forEach var="cons" items="${consumidores}">
 					<c:choose>
 					<c:when test="${ cons.getClass().name == 'br.ccomp.modelo.Funcionario' }">
 						<tr>
-							<td>${cons.nome }</td>
-							<td>${cons.matricula }</td>
-							<td>${cons.anoIngresso }</td>
-							<td>${cons.cpf}</td>
-							<td>${cons.departamento.sigla}</td>
+							<td style="width: 30%">${cons.nome }</td>
+							<td style="width: 10%">${cons.matricula }</td>
+							<td style="width: 20%">${cons.anoIngresso }</td>
+							<td style="width: 15%">${cons.cpf}</td>
+							<td style="width: 10%">${cons.departamento.sigla}</td>
+							<td style="width: 15%"><center><a data-target="#conteudo" class="button" href="consumidor?acao=Editar&id=${cons.id}">Editar</a></center></td>
 						</tr>
 					</c:when>
 					</c:choose>

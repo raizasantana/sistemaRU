@@ -18,7 +18,7 @@ public class ConsumidorGateway {
 
 	Connection con = ConnectionFactory.getConnection();
 	
-	public void insertFuncionario(int departamento, String nome, String cpf, String titulo, int matricula, int anoIngresso, String sexo){
+	public boolean  insertFuncionario(int departamento, String nome, String cpf, String titulo, int matricula, int anoIngresso, String sexo){
 		String sql = "INSERT INTO consumidor (nome, cpf, matricula, sexo, ano_ingresso, titulo, id_departamento)" +
 				"VALUES (?,?,?,?,?,?,?)";
 		
@@ -35,12 +35,15 @@ public class ConsumidorGateway {
 			prst.executeUpdate();
 			
 			prst.close();
+			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
-	public void insertAluno(int curso, String nome,String cpf,int matricula, int anoIngresso, String sexo){
+	public boolean insertAluno(int curso, String nome,String cpf,int matricula, int anoIngresso, String sexo){
 		String sql = "INSERT INTO consumidor(nome, cpf, matricula, sexo, ano_ingresso, id_curso) " +
 				"VALUES (?,?,?,?,?,?)";
 		
@@ -56,25 +59,30 @@ public class ConsumidorGateway {
 			prst.executeUpdate();
 			
 			prst.close();
+			
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 	
-	public void delete(Integer idConsumidor) throws SQLException{
+	public boolean delete(Integer idConsumidor) {
 		String sql = "DELETE FROM consumidor" +
 				"WHERE id = ?";
-		
-		PreparedStatement prst = con.prepareStatement(sql);
-		prst.setInt(1, idConsumidor);
-		
-		prst.executeQuery();
-		
-		prst.close();
+		try {
+			PreparedStatement prst = con.prepareStatement(sql);
+			prst.setInt(1, idConsumidor);
+			ResultSet rs = prst.executeQuery();
+			prst.close();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
-	public ArrayList<Consumidor> findAll() throws SQLException
-	{
+	public ArrayList<Consumidor> findAll() {
 		ArrayList<Consumidor> cons = new ArrayList<Consumidor>();
 		Connection conn = null;
 		
@@ -88,6 +96,7 @@ public class ConsumidorGateway {
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()){
+				Consumidor c;
 				if(rs.getString("c.id_departamento") == null) //Criar aluno
 				{
 					Aluno a = new Aluno();
@@ -119,8 +128,9 @@ public class ConsumidorGateway {
 					cons.add(f);
 				}
 			}
-		}catch (SQLException | ClassNotFoundException e) {
+		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
+			return null;
 		}
 		
 		return cons;
@@ -144,19 +154,8 @@ public class ConsumidorGateway {
 		else
 			return Sexo.MASCULINO;
 	}
-	public ResultSet find(Integer id) throws SQLException{
-		String sql = "SELECT * FROM consumidor" +
-				"WHERE id = ?";
-		
-		PreparedStatement prst = con.prepareStatement(sql);
-		prst.setInt(1, id);
-		ResultSet rs = prst.executeQuery();
-		
-		prst.close();
-		return rs;
-	}
 	
-	public Consumidor findMatricula(Integer matricula) throws SQLException{
+	public Consumidor findByMatricula(Integer matricula) throws SQLException{
 		String sql = "SELECT * FROM consumidor " +
 				"WHERE matricula = ?";
 		
@@ -164,56 +163,117 @@ public class ConsumidorGateway {
 		prst.setInt(1, matricula);
 		ResultSet rs = prst.executeQuery();
 		
-		Consumidor consumidor = null;
+		Aluno consumidor_a = null;
+		Funcionario consumidor_f = null;
 		if(rs.next()){
-			consumidor = new Consumidor(rs.getInt("id"), rs.getInt("matricula"));
+			if(rs.getString("id_curso") == null)
+				consumidor_f = new Funcionario(rs.getInt("id"), rs.getInt("matricula"));
+			else
+				consumidor_a = new Aluno(rs.getInt("id"), rs.getInt("matricula"));
 		}
 		
 		prst.close();
-		return consumidor;
+		return consumidor_a == null ? consumidor_f : consumidor_a;
 	}
 	
-	public boolean findbyCpf(String cpf) throws SQLException{
+	public Consumidor find(Integer id) {
+		String sql = "select cu.sigla, d.sigla, c.* from consumidor c left join curso cu on (c.id_curso = cu.id)" + 
+						" left join departamento d on (d.id = c.id_departamento)" +
+				" WHERE c.id = ?";
+		
+		try {
+			PreparedStatement prst = con.prepareStatement(sql);
+			prst.setInt(1, id);
+			ResultSet rs = prst.executeQuery();
+			
+			
+			if(rs.next()) {
+				if(rs.getString("c.id_curso") == null) {
+					Funcionario c = new Funcionario();
+					c.setAnoIngresso(rs.getInt("c.ano_ingresso"));
+					c.setCpf(rs.getString("c.cpf"));
+					c.setId(rs.getInt("c.id"));
+					c.setMatricula(rs.getInt("c.matricula"));
+					c.setNome(rs.getString("c.nome"));
+					c.setSexo(getSexo(rs.getString("c.sexo")));				
+					c.setTitulo(getTitulo(rs.getString("c.titulo")));
+					Departamento dTemp = new Departamento();
+					dTemp.setSigla(rs.getString("d.sigla"));
+					dTemp.setId(rs.getInt("c.id_departamento"));
+					c.setDepartamento(dTemp);
+					
+					rs.close();
+					prst.close();
+					
+					return c;
+				} else {
+					Aluno c = new Aluno();
+					c.setAnoIngresso(rs.getInt("c.ano_ingresso"));
+					c.setCpf(rs.getString("c.cpf"));
+					c.setId(rs.getInt("c.id"));
+					c.setMatricula(rs.getInt("c.matricula"));
+					c.setNome(rs.getString("c.nome"));
+					c.setSexo(getSexo(rs.getString("c.sexo")));
+					Curso cursoTemp = new Curso();
+					cursoTemp.setId(rs.getInt("c.id_curso"));
+					cursoTemp.setSigla(rs.getString("cu.sigla"));
+					
+					c.setCurso(cursoTemp);
+					
+					rs.close();
+					prst.close();
+					
+					return c;
+				}
+			} else {
+				return null;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}		
+	}
+	
+	public boolean findbyCpf(String cpf) {
 		boolean achou = false;
 		
 		String sql = "SELECT * FROM consumidor " +
 				"WHERE cpf = ?";
 		
-		PreparedStatement prst = con.prepareStatement(sql);
-		prst.setString(1, cpf);
-		
-		ResultSet rs = prst.executeQuery();
-		
-		
-		if(rs.next())
-		{
-			achou = true;
+		Consumidor cons = null;
+		PreparedStatement prst;
+		try {
+			prst = con.prepareStatement(sql);
+			prst.setString(1, cpf);
+			ResultSet rs = prst.executeQuery();
+			if(rs.next()) {
+				achou = true;
+			}
+			prst.close();
+			return achou;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		}
-		
-		prst.close();
-		return achou;
 	}
-		/*
-		if(rs.next())
-		{
-			cons = new Consumidor();
-			cons.setMatricula(rs.getInt("consumidor.matricula"));
-			cons.setNome(rs.getString("consumidor.nome"));
-			cons.setCpf(rs.getString("consumidor.cpf"));			
-			cons.setSexo(getSexo(rs.getString("sconsumidor.exo")));			
-			cons.setTitulo(getTitulo(rs.getString("consumidor.titulo")));
-			cons.setAnoIngresso(rs.getInt("consumidor.ano"));
-			
-			
-		}
-		
-		
-		
-		
-		
-	}*/
 	
-	
+	public void update(Integer id, int anoIngresso, int matricula, String nome,
+			String sexo) throws SQLException {
+		// TODO Auto-generated method stub
+		String sql = "update consumidor set ano_ingresso = ?, matricula = ?, nome = ?, sexo = ? where id = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1,anoIngresso);
+		ps.setInt(2, matricula);
+		ps.setString(3,nome);
+		ps.setString(4,sexo);
+		ps.setInt(5,id);
+		
+		ps.executeUpdate();
+		
+		ps.close();
+		
+	}
 	
 	
 }

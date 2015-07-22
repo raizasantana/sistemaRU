@@ -32,7 +32,7 @@
 				<c:if test="${refeicoes!=null}">
 					<c:forEach var="refeicao" items="${refeicoes}">
 						<tr>
-							<td> <input type="radio" name="refeicao_selecionada" value="${refeicao.id}"> </td>
+							<td> <input type="radio" name="refeicao_selecionada" value="${refeicao.id}" checked="checked"> </td>
 							<td> ${refeicao.turno} </td>
 							<td> ${refeicao.descricao} </td>
 							<td> ${refeicao.opcaoVegetariana} </td>

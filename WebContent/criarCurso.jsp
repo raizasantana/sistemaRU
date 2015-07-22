@@ -15,7 +15,7 @@
 				<td>Nome:</td><td><input type="text" id="nome" name="nome"></td>
 			</tr>
 			<tr>
-				<td>Sigla:</td><td><input type="text" id="sigla" name="sigla"></td>
+				<td>Sigla:</td><td><input type="text" id="sigla" name="sigla" maxlength="5"></td>
 			</tr>
 			<tr>
 			<td colspan=2>Departamento:</td>

@@ -14,7 +14,7 @@
 				<td>Nome:</td><td><input type="text" id="nome" name="nome" value="${curso_nome}"></td>
 			</tr>
 			<tr>
-				<td>Sigla:</td><td><input type="text" id="sigla" name="sigla" value="${curso_sigla}"></td>
+				<td>Sigla:</td><td><input type="text" id="sigla" name="sigla" maxlength="5" value="${curso_sigla}"></td>
 			</tr>
 			<tr><td colspan=2>
 			<select id="departamentos" name="departamentos">

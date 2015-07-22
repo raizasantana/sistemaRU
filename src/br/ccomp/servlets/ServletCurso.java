@@ -21,6 +21,7 @@ public class ServletCurso extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response){
 		String acao = (String) request.getParameter("acao");
+		
 		if (acao != null){
 			switch (acao) {
 			case "Criar":
@@ -46,6 +47,7 @@ public class ServletCurso extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response){
 		String acao = (String) request.getParameter("acao");
+		
 		if (acao != null){
 			switch (acao) {
 			case "Criar":
@@ -100,7 +102,7 @@ public class ServletCurso extends HttpServlet{
 		
 		try{
 			Curso curso = transactionScriptCurso.getCurso(id);
-			request.setAttribute("message", message);
+			request.setAttribute("response", message);
 			request.setAttribute("curso_id", curso.getId());
 			request.setAttribute("curso_nome", curso.getNome());
 			request.setAttribute("curso_sigla", curso.getSigla());
@@ -111,6 +113,7 @@ public class ServletCurso extends HttpServlet{
 			
 		} catch (Exception e){
 			message = e.getMessage();
+			request.setAttribute("response", message);
 		}
 		
 		

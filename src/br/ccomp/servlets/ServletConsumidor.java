@@ -3,6 +3,7 @@ package br.ccomp.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import br.ccomp.modelo.Consumidor;
 import br.ccomp.modelo.Curso;
 import br.ccomp.modelo.Departamento;
 import br.ccomp.modelo.Titulo;
+import br.ccomp.modelo.Turno;
 import br.ccomp.transactions.TransactionScriptConsumidor;
 import br.ccomp.transactions.TransactionScriptCurso;
 import br.ccomp.transactions.TransactionScriptDepartamento;
@@ -37,6 +39,12 @@ public class ServletConsumidor extends HttpServlet{
 				case "listarCurso":
 					listarCursosDepartamentos(request, response);
 					break;
+				case "Editar":
+					getConsumidor(request, response);
+					break;
+				case "Alterar":
+					atualizarConsumidor(request, response);
+					break;
 				default:
 					break;
 			}
@@ -59,6 +67,12 @@ public class ServletConsumidor extends HttpServlet{
 					break;
 				case "Listar":
 					listarConsumidores(request, response);
+					break;
+				case "Editar":
+					getConsumidor(request, response);
+					break;
+				case "Alterar":
+					atualizarConsumidor(request, response);
 					break;
 				default:
 					break;
@@ -114,7 +128,7 @@ public class ServletConsumidor extends HttpServlet{
 		request.setAttribute("titulos", titulos);
 				
 		try {
-			request.getRequestDispatcher("criarConsumidor.jsp").forward(request, response);
+			request.getRequestDispatcher("/criarConsumidor.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -132,10 +146,57 @@ public class ServletConsumidor extends HttpServlet{
 		try {
 			request.getRequestDispatcher("listarConsumidor.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+	
+	private void getConsumidor(HttpServletRequest request,
+			HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		TransactionScriptConsumidor cons = new TransactionScriptConsumidor();
+		
+		Consumidor c = cons.getConsumidor(Integer.valueOf(request.getParameter("id")));
+		
+		request.setAttribute("consumidor", c);
+		
+		TransactionScriptCurso tsCurso = new TransactionScriptCurso();
+		TransactionScriptDepartamento tsDepartamento = new TransactionScriptDepartamento();
+		
+		ArrayList<Curso> cursos = tsCurso.listarCurso();
+		ArrayList<Departamento> deps = tsDepartamento.listarDepartamentos();
+		
+		ArrayList<String> titulos = new ArrayList<String>(); 
+		titulos.add(Titulo.DOUTORADO.getNome());
+		titulos.add(Titulo.ESPECIALIZACAO.getNome());
+		titulos.add(Titulo.MESTRADO.getNome());
+				
+		request.setAttribute("cursos", cursos);
+		request.setAttribute("departamentos", deps);
+		request.setAttribute("titulos", titulos);
+		
+		try {
+			request.getRequestDispatcher("/editarConsumidor.jsp").forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void atualizarConsumidor(HttpServletRequest request, HttpServletResponse response) {
+		String nome = (String)request.getParameter("nome");
+		String sexo = (String)request.getParameter("sexo");
+		int id = Integer.valueOf((String) request.getParameter("id"));
+		int matricula = Integer.valueOf((String) request.getParameter("matricula"));
+		int ano = Integer.valueOf((String) request.getParameter("ano"));
+		
+		
+		TransactionScriptConsumidor cons = new TransactionScriptConsumidor();
+		
+		cons.atualizarConsumidor(id, ano, matricula, nome, sexo);
+		
+		listarConsumidores(request, response);
+		
 	}
 
 }

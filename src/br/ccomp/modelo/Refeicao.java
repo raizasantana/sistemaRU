@@ -12,7 +12,8 @@ public class Refeicao {
 	
 	}
 	
-	public Refeicao(Turno turno, String descricao){
+	public Refeicao(int id ,Turno turno, String descricao){
+		this.id = id;
 		this.turno = turno;
 		this.descricao = descricao;
 	}

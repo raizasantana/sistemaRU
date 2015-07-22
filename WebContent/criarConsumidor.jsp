@@ -26,14 +26,14 @@
 			<td>Ano de ingresso:</td><td><input type="text" id="ano" name="ano"></td>
 			</tr>
 			<tr>
+			<td>CPF:</td><td><input type="text" id="cpf" name="cpf"></td>
+			</tr>
+			<tr>
 			<td colspan=2>Sexo:</td>
 			</tr>
 			<tr>
 				<td><input type="radio" name="sexo" value="MASCULINO" />Masculino</td>
-				<td><input type="radio" name="sexo" value="FEMININO" checked/>Feminino</td>
-			</tr>
-			<tr>
-			<td>CPF:</td><td><input type="text" id="cpf" name="cpf"></td>
+				<td><input type="radio" name="sexo" value="FEMININO" />Feminino</td>
 			</tr>
 			</table>
 			<!-- Funcionario -->

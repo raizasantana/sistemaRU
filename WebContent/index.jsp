@@ -21,7 +21,7 @@
 				<div id="nav">
 					<hr width="100%" /><center>
 						<ul class="topnav">
-							<li><a href="#" onclick="myload('ticket?acao=Listar')">Criar Ticket</a></li> || 
+							<li><a href="#" onclick="myload('ticket?acao=Listar')">Gerenciar Tickets</a></li> || 
 							<li id="system_nav"><a href="#">Visualizar Banco<img src="img/arrow.png"/></a></li> || 
 							<li><a href="#" onclick="myload('creditos.html')">Créditos</a></li>
 						</ul>

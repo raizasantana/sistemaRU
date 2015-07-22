@@ -3,14 +3,16 @@ package br.ccomp.transactions;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.catalina.ant.FindLeaksTask;
+
 import br.ccomp.gateway.ConsumidorGateway;
+import br.ccomp.gateway.CursoGateway;
+import br.ccomp.modelo.Aluno;
 import br.ccomp.modelo.Consumidor;
 import br.ccomp.modelo.Sexo;
 import br.ccomp.modelo.Titulo;
 
 public class TransactionScriptConsumidor {
-	
-	
 	
 	int[] pesoCPF = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 	
@@ -33,14 +35,12 @@ public class TransactionScriptConsumidor {
 	
 	}
 	
-	public TransactionScriptConsumidor()
-	{
+	public TransactionScriptConsumidor(){
 		
 	}
 	
 	//Aluno
-	public boolean criarAluno(int curso, String nome,String cpf,int matricula, int anoIngresso, String sexo)
-	{
+	public boolean criarAluno(int curso, String nome,String cpf,int matricula, int anoIngresso, String sexo) {
 		//Validar cpf
 		if(!isValidCPF(cpf))
 			return false;
@@ -51,19 +51,15 @@ public class TransactionScriptConsumidor {
 			if(consGT.findbyCpf(cpf))
 				return false;
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			return false;
 		}
 				
-		consGT.insertAluno(curso, nome, cpf, matricula, anoIngresso,sexo);
-		
-		//cG.insertAluno(a); // TODO Mudar o retorno do insert pra boolean
-		return true;
+		return consGT.insertAluno(curso, nome, cpf, matricula, anoIngresso,sexo);
 	}
 	
 	//Funcionario
-	public boolean criarFuncionario(int departamento, String nome, String cpf, String titulo, int matricula, int anoIngresso, String sexo)
-	{
+	public boolean criarFuncionario(int departamento, String nome, String cpf, String titulo, int matricula, int anoIngresso, String sexo) {
 		//Validar cpf
 		if(!isValidCPF(cpf))
 			return false;
@@ -74,31 +70,47 @@ public class TransactionScriptConsumidor {
 			if(consGT.findbyCpf(cpf))
 				return false;
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
-		consGT.insertFuncionario(departamento, nome, cpf, titulo, matricula, anoIngresso, sexo);
-		return true;
+		return consGT.insertFuncionario(departamento, nome, cpf, titulo, matricula, anoIngresso, sexo);
 	}
 	
-	public ArrayList<Consumidor> listarConsumidores()
-	{
+	public ArrayList<Consumidor> listarConsumidores() {
 		ConsumidorGateway consGT = new ConsumidorGateway();
 		ArrayList<Consumidor> cons = null;
 		
 		try {
 			cons = consGT.findAll();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		return cons;
 	}
 	
-	public Titulo getTitulo(String tit)
-	{
+	public Consumidor getConsumidor(int id)	{
+		ConsumidorGateway cG = new ConsumidorGateway();
+		Consumidor c = null;
+		try {
+			 c = cG.find(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return c;
+	}
+	
+	public void atualizarConsumidor(int id, int ano, int matricula, String nome, String sexo) {
+		ConsumidorGateway cG = new ConsumidorGateway();
+		try {
+			cG.update(id, ano, matricula, nome, sexo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public Titulo getTitulo(String tit) {
 		if(tit.equals(Titulo.DOUTORADO.getNome()))
 			return Titulo.DOUTORADO;
 		else if (tit.equals(Titulo.ESPECIALIZACAO.getNome()))
@@ -107,18 +119,22 @@ public class TransactionScriptConsumidor {
 			return Titulo.MESTRADO;
 	}
 	
-	public Sexo getSexo(String sexo)
-	{
+	public Sexo getSexo(String sexo) {
 		if(sexo.equals(Sexo.FEMININO.getNome()))
 			return Sexo.FEMININO;
 		else
 			return Sexo.MASCULINO;
 	}
 
-	public Consumidor getConsumidorMatricula(Integer matricula) throws SQLException {
+	public Consumidor getConsumidorMatricula(Integer matricula) {
 		ConsumidorGateway consGT = new ConsumidorGateway();
 		
-		return consGT.findMatricula(matricula);
+		try {
+			return consGT.findByMatricula(matricula);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 

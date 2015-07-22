@@ -3,7 +3,10 @@ package br.ccomp.modelo;
 public class Funcionario extends Consumidor{
 
 	public Funcionario() {
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Funcionario(int id, int matricula){
+		super(id, matricula);
 	}
 
 	private Departamento departamento;
@@ -16,12 +19,5 @@ public class Funcionario extends Consumidor{
 		this.departamento = departamento;
 	}
 	
-	@Override
-	public float getPreco(Turno t)
-	{
-		if(t.equals(Turno.MANHA.getNome()))
-			return (float) 3.0;
-		else return (float) 6.0;
-	}
 	
 }

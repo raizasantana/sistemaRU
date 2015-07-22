@@ -49,6 +49,10 @@ public class Ticket {
 	}
 	public void setPago(boolean pago) {
 		this.pago = pago;
-	}	
+	}
+	
+	public boolean getPago(){
+		return pago;
+	}
 
 }

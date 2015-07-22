@@ -76,6 +76,7 @@ public class TicketGateway {
 					rs.getInt("t.id"),
 					rs.getFloat("t.valor"),
 					new Refeicao(
+							rs.getInt("r.id"),
 							turno,
 							rs.getString("r.descricao")),
 					new Consumidor(
@@ -112,6 +113,7 @@ public class TicketGateway {
 					rs.getInt("t.id"),
 					rs.getFloat("t.valor"),
 					new Refeicao(
+							rs.getInt("r.id"),
 							turno,
 							rs.getString("r.descricao")),
 					new Consumidor(
@@ -128,7 +130,7 @@ public class TicketGateway {
 
 	public Ticket find(Integer id) throws SQLException{
 		String sql = "SELECT * FROM ticket t, refeicao r, consumidor c " +
-				"WHERE id = ? AND t.id_refeicao = r.id AND t.id_consumidor = c.id";
+				"WHERE t.id = ? AND t.id_refeicao = r.id AND t.id_consumidor = c.id";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
 		prst.setInt(1, id);
@@ -147,6 +149,7 @@ public class TicketGateway {
 					rs.getInt("t.id"),
 					rs.getFloat("t.valor"),
 					new Refeicao(
+							rs.getInt("r.id"),
 							turno,
 							rs.getString("r.descricao")),
 					new Consumidor(

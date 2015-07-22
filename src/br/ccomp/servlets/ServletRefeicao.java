@@ -47,6 +47,7 @@ public class ServletRefeicao extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response){
 		String acao = (String) request.getParameter("acao");
+		
 		if (acao != null){
 			switch (acao) {
 			case "carregarTurno":

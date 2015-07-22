@@ -25,6 +25,26 @@ public class DepartamentoGateway {
 			
 			prst.close();
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 		
+			
+	}
+	
+	public void update(int id, String nome, String sigla){
+		String sql = "UPDATE DEPARTAMENTO SET NOME = ?, SIGLA = ? WHERE ID = ?";
+		
+		try {
+			PreparedStatement prst = con.prepareStatement(sql);
+			prst.setString(1, nome);
+			prst.setString(2, sigla);
+			prst.setInt(3, id);
+			
+			prst.executeUpdate();
+			
+			prst.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 		
 			
@@ -37,7 +57,7 @@ public class DepartamentoGateway {
 		PreparedStatement prst = con.prepareStatement(sql);
 		prst.setInt(1, idDepartamento);
 		
-		prst.executeQuery();
+		ResultSet rs = prst.executeQuery();
 		
 		prst.close();
 		
@@ -70,7 +90,7 @@ public class DepartamentoGateway {
 		return departamentos;
 	}
 
-	public ResultSet find(Integer id) throws SQLException{
+	public Departamento find(Integer id) throws SQLException{
 		String sql = "SELECT * FROM departamento " +
 				"WHERE id = ?";
 		
@@ -78,8 +98,16 @@ public class DepartamentoGateway {
 		prst.setInt(1, id);
 		ResultSet rs = prst.executeQuery();
 		
+		Departamento dpt = null;
+		if(rs.next()){
+			dpt = new Departamento(
+					rs.getInt("id"),
+					rs.getString("nome"),
+					rs.getString("sigla"));
+		}
+		
 		prst.close();
-		return rs;
+		return dpt;
 	}
 	
 	public boolean find(String sigla) throws SQLException{
@@ -98,6 +126,27 @@ public class DepartamentoGateway {
 		
 		prst.close();
 		//con.close();
+		rs.close();
+		
+		return achou;
+	}
+	
+	public boolean find(String sigla, int id) throws SQLException{
+		String sql = "SELECT * FROM departamento " +
+				"WHERE sigla = ? AND id != ?";
+		
+		PreparedStatement prst = con.prepareStatement(sql);
+		prst.setString(1, sigla);
+		prst.setInt(2, id);
+		
+		ResultSet rs = prst.executeQuery();
+		
+		boolean achou = false;
+		
+		if(rs.next())
+			achou = true;
+		
+		prst.close();
 		rs.close();
 		
 		return achou;
