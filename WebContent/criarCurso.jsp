@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,16 +8,32 @@
 <title>Criar curso</title>
 </head>
 <body>
-	<p>Criar Curso</p>
 	<form action="curso" method='post'>
-		<p>Nome: <input type="text" id="nome" name="nome"></p>
-		<p>Sigla: <input type="text" id="sigla" name="sigla"></p>
-		<p>idDepartamento: <input type="text" id="idDepartamento" name="idDepartamento"></p>
-		</br> <input type="submit" name="acao" value="Criar">
+		<table class="TableForm">
+			<input type="text" id="id" name="id" value="${curso_id}" style="display:none">
+			<tr>
+				<td>Nome:</td><td><input type="text" id="nome" name="nome"></td>
+			</tr>
+			<tr>
+				<td>Sigla:</td><td><input type="text" id="sigla" name="sigla" maxlength="5"></td>
+			</tr>
+			<tr>
+			<td colspan=2>Departamento:</td>
+			</tr>
+			<tr><td colspan=2>
+			<select id="departamentos" name="departamentos">
+			<c:if test="${departamentos!=null}">
+				<c:forEach var="departamento" items="${departamentos}">
+					<option value=${ departamento.id }> ${ departamento.sigla }</option>
+				</c:forEach>
+			</c:if>
+			</select>
+			</td></tr>
+		</table>
+		<input type="submit" name="acao" value="Criar">
 	</form>
+
+	<h1>${message}</h1>
 	
-	<c:if mensagem="${not empty message}">
-    	<h1>${message}</h1>
-	</c:if>
 </body>
 </html>

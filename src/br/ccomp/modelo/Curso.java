@@ -7,6 +7,16 @@ public class Curso {
 	private String sigla;
 	private Departamento departamento;
 	
+	public Curso(){
+		
+	}
+	
+	public Curso(int id, String nome, String sigla, Departamento departamento){
+		this.id = id;
+		this.nome = nome;
+		this.sigla = sigla;
+		this.departamento = departamento;
+	}
 	
 	public String getNome() {
 		return nome;
