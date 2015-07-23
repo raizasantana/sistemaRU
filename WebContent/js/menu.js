@@ -25,6 +25,7 @@ $(document).ready(function(){
 });
 
 function myload(link){
+	$("#conteudo").hide("fast");
 	$("#conteudo").slideUp();
 	$.ajax({
 		url: link,
@@ -32,13 +33,18 @@ function myload(link){
 		success: function(result,status,xhr){
 			$("#conteudo").html(result);
 			$(".button").button().click(function(event) {
+				$("#conteudo").hide("fast");
+				$("#conteudo").slideUp();
 				var target = $($(this).attr('data-target'));
 			    target.load($(this).attr('href'),function(){
 			    	$("input[type=submit]").button();
 			    });
+			    $("#conteudo").slideDown();
+			    $("#conteudo").show("fast");
 				event.preventDefault();
 		    });
 		}
 	});
 	$("#conteudo").slideDown();
+	$("#conteudo").show("fast");
 }

@@ -3,11 +3,7 @@ package br.ccomp.transactions;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.apache.catalina.ant.FindLeaksTask;
-
 import br.ccomp.gateway.ConsumidorGateway;
-import br.ccomp.gateway.CursoGateway;
-import br.ccomp.modelo.Aluno;
 import br.ccomp.modelo.Consumidor;
 import br.ccomp.modelo.Sexo;
 import br.ccomp.modelo.Titulo;

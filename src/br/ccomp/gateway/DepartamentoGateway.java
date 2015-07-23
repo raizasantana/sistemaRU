@@ -25,7 +25,6 @@ public class DepartamentoGateway {
 			
 			prst.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 		
 			
@@ -44,7 +43,6 @@ public class DepartamentoGateway {
 			
 			prst.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 		
 			
@@ -57,7 +55,7 @@ public class DepartamentoGateway {
 		PreparedStatement prst = con.prepareStatement(sql);
 		prst.setInt(1, idDepartamento);
 		
-		ResultSet rs = prst.executeQuery();
+		prst.executeQuery();
 		
 		prst.close();
 		

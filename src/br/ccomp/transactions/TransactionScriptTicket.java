@@ -3,9 +3,7 @@ package br.ccomp.transactions;
 import java.util.ArrayList;
 
 import br.ccomp.gateway.TicketGateway;
-import br.ccomp.modelo.Aluno;
 import br.ccomp.modelo.Consumidor;
-import br.ccomp.modelo.Funcionario;
 import br.ccomp.modelo.Refeicao;
 import br.ccomp.modelo.Ticket;
 import br.ccomp.modelo.Turno;

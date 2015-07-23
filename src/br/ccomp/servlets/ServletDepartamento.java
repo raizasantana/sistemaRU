@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.ccomp.modelo.Curso;
 import br.ccomp.modelo.Departamento;
-import br.ccomp.transactions.TransactionScriptCurso;
 import br.ccomp.transactions.TransactionScriptDepartamento;
 
 @WebServlet("/departamento")

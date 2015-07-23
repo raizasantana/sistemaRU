@@ -3,7 +3,6 @@ package br.ccomp.servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import br.ccomp.modelo.Consumidor;
 import br.ccomp.modelo.Curso;
 import br.ccomp.modelo.Departamento;
 import br.ccomp.modelo.Titulo;
-import br.ccomp.modelo.Turno;
 import br.ccomp.transactions.TransactionScriptConsumidor;
 import br.ccomp.transactions.TransactionScriptCurso;
 import br.ccomp.transactions.TransactionScriptDepartamento;
@@ -130,7 +128,6 @@ public class ServletConsumidor extends HttpServlet{
 		try {
 			request.getRequestDispatcher("/criarConsumidor.jsp").forward(request, response);
 		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -151,9 +148,7 @@ public class ServletConsumidor extends HttpServlet{
 
 	}
 	
-	private void getConsumidor(HttpServletRequest request,
-			HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void getConsumidor(HttpServletRequest request, HttpServletResponse response) {
 		TransactionScriptConsumidor cons = new TransactionScriptConsumidor();
 		
 		Consumidor c = cons.getConsumidor(Integer.valueOf(request.getParameter("id")));

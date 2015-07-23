@@ -25,11 +25,10 @@ Connection con = ConnectionFactory.getConnection();
 			prst.setString(3, opVegan);
 			prst.setString(4, tipo);
 			
-			Integer rs = prst.executeUpdate();
+			prst.executeUpdate();
 			
 			prst.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 		
 			
@@ -42,7 +41,7 @@ Connection con = ConnectionFactory.getConnection();
 		PreparedStatement prst = con.prepareStatement(sql);
 		prst.setInt(1, idRefeicao);
 		
-		Integer rs = prst.executeUpdate();
+		prst.executeUpdate();
 		
 		prst.close();
 		
@@ -126,7 +125,6 @@ Connection con = ConnectionFactory.getConnection();
 			
 			prst.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
