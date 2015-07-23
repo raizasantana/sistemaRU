@@ -13,24 +13,26 @@ public class TransactionScriptCurso {
 		cursoGateway = new CursoGateway();
 	}
 	
-	public void inserirCurso(String nome, String sigla, int idDepartamento) throws Exception{
+	public boolean inserirCurso(String nome, String sigla, int idDepartamento) throws Exception{
 		if(nome.equals("") || sigla.equals(""))
 			throw new Exception("Curso com dado obrigatório não preenchido");
 		
 		if (!cursoGateway.find(sigla)){	
 			cursoGateway.insert(nome, sigla, idDepartamento);
+			return true;
 		}
 		else
 			throw new Exception("Curso de mesma sigla já cadastrado");
 	}
 	
-	public void alterarCurso(int id, String nome, String sigla, int idDepartamento) throws Exception{
+	public boolean alterarCurso(int id, String nome, String sigla, int idDepartamento) throws Exception{
 		if(nome.equals("") || sigla.equals(""))
 			throw new Exception("Curso com dado obrigatório não preenchido");
 		
-		if(!cursoGateway.find(id, sigla))
+		if(!cursoGateway.find(id, sigla)){
 			cursoGateway.update(id, nome, sigla, idDepartamento);
-		else
+			return true;
+		}else
 			throw new Exception("Curso de mesma sigla já cadastrado");
 	}
 	

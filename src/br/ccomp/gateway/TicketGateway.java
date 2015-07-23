@@ -14,7 +14,7 @@ import br.ccomp.modelo.Turno;
 public class TicketGateway {
 	Connection con = ConnectionFactory.getConnection();
 	
-	public void insert(Integer idConsumidor, Float valor, Integer idRefeicao, Boolean pago){
+	public boolean insert(Integer idConsumidor, Float valor, Integer idRefeicao, Boolean pago) throws SQLException{
 		String sql = "INSERT INTO ticket (id_consumidor, valor, id_refeicao, pago) " +
 				"VALUES (?,?,?,?)";
 		
@@ -28,15 +28,16 @@ public class TicketGateway {
 			prst.executeUpdate();
 			
 			prst.close();
+			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		} 		
 		
 		
 	}
 	
-	public void update(Integer id, Boolean pago){
+	public boolean update(Integer id, Boolean pago) throws SQLException{
 		String sql = "UPDATE TICKET SET PAGO = ? WHERE ID = ?";
 		
 		try {
@@ -48,9 +49,10 @@ public class TicketGateway {
 			prst.executeUpdate();
 			
 			prst.close();
+			return true;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		} 		
 			
 	}

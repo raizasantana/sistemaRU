@@ -1,6 +1,7 @@
 package br.ccomp.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -95,11 +96,14 @@ public class ServletRefeicao extends HttpServlet{
 		String message = null;
 		
 		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
-		
-		if (transactionScriptRefeicao.inserirRefeicao(descricao, opcaoVegetariana, tipo, turno))
-			message = "Inserido com sucesso";
-		else
-			message = "Refeicao n�o pode ser cadastrada";
+		try {
+			if (transactionScriptRefeicao.inserirRefeicao(descricao, opcaoVegetariana, tipo, turno))
+				message = "Inserido com sucesso";
+			else
+				message = "Refeicao n�o pode ser cadastrada";
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
 		
 		request.setAttribute("response", message);
 		

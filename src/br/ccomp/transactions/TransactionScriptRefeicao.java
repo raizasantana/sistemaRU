@@ -17,7 +17,7 @@ private RefeicaoGateway refeicaoGateway;
 	
 	// Retorna sucesso ou falha (true ou false)
 	// TODO: voltar a verificar antes de inserir
-	public boolean inserirRefeicao(String descricao, String opcaoVegetariana, TipoRefeicao tipo, Turno turno){
+	public boolean inserirRefeicao(String descricao, String opcaoVegetariana, TipoRefeicao tipo, Turno turno) throws SQLException{
 //		try {
 //			
 //			if (!refeicaoGateway.find(sigla)){
@@ -68,7 +68,12 @@ private RefeicaoGateway refeicaoGateway;
 		return null;
 	}
 	
-	public void alterarRefeicao(Integer id, String descricao, String opVegan) {
-		refeicaoGateway.update(id, descricao, opVegan);
+	public boolean alterarRefeicao(Integer id, String descricao, String opVegan) throws SQLException {
+		try {
+			refeicaoGateway.update(id, descricao, opVegan);
+			return true;
+		} catch (SQLException e) {
+			throw e;
+		}
 	}
 }

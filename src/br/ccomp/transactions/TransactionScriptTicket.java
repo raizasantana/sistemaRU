@@ -1,5 +1,6 @@
 package br.ccomp.transactions;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import br.ccomp.gateway.TicketGateway;
@@ -15,7 +16,7 @@ public class TransactionScriptTicket {
 		ticketGateway = new TicketGateway();
 	}
 	
-	public void inserirTicket(Consumidor consumidor, Refeicao refeicao, int pago) throws Exception{
+	public boolean inserirTicket(Consumidor consumidor, Refeicao refeicao, int pago) throws Exception{
 		float valor = 0f;
 		
 		if(consumidor == null)
@@ -32,11 +33,11 @@ public class TransactionScriptTicket {
 		
 		
 		boolean isPago = pago == 1 ? true : false;
-		ticketGateway.insert(consumidor.getId(), valor, refeicao.getId(), isPago);
+		return ticketGateway.insert(consumidor.getId(), valor, refeicao.getId(), isPago);
 	}
 	
-	public void alterarTicket(Integer id, Boolean pago){
-		ticketGateway.update(id, pago);
+	public boolean alterarTicket(Integer id, Boolean pago) throws SQLException{
+		return ticketGateway.update(id, pago);
 	}
 	
 	public Ticket getTicket(int id) throws Exception{

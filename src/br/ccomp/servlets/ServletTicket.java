@@ -1,6 +1,7 @@
 package br.ccomp.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -120,12 +121,16 @@ public class ServletTicket extends HttpServlet {
 		TransactionScriptTicket transactionScriptTicket = new TransactionScriptTicket();
 		
 		boolean pago_b = pago == 1 ? true : false;
-		transactionScriptTicket.alterarTicket(id, pago_b);
-		String message = "Alterado com sucesso";
-		
-		request.setAttribute("response", message);
-		
-		listarTicket(request, response);
+		try {
+			transactionScriptTicket.alterarTicket(id, pago_b);
+			String message = "Alterado com sucesso";
+			
+			request.setAttribute("response", message);
+			
+			listarTicket(request, response);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void editarTicket(HttpServletRequest request, HttpServletResponse response) {

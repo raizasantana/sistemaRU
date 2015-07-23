@@ -97,12 +97,14 @@ public class TransactionScriptConsumidor {
 		return c;
 	}
 	
-	public void atualizarConsumidor(int id, int ano, int matricula, String nome, String sexo) {
+	public boolean atualizarConsumidor(int id, int ano, int matricula, String nome, String sexo) throws SQLException {
 		ConsumidorGateway cG = new ConsumidorGateway();
 		try {
 			cG.update(id, ano, matricula, nome, sexo);
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 	

@@ -12,7 +12,7 @@ public class DepartamentoGateway {
 	
 	Connection con = ConnectionFactory.getConnection();
 	
-	public void insert(String nome, String sigla){
+	public boolean insert(String nome, String sigla) throws SQLException{
 		String sql = "INSERT INTO departamento(nome, sigla) " +
 				"VALUES (?,?)";
 		
@@ -24,13 +24,15 @@ public class DepartamentoGateway {
 			prst.executeUpdate();
 			
 			prst.close();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		} 		
 			
 	}
 	
-	public void update(int id, String nome, String sigla){
+	public boolean update(int id, String nome, String sigla) throws SQLException{
 		String sql = "UPDATE DEPARTAMENTO SET NOME = ?, SIGLA = ? WHERE ID = ?";
 		
 		try {
@@ -42,8 +44,10 @@ public class DepartamentoGateway {
 			prst.executeUpdate();
 			
 			prst.close();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		} 		
 			
 	}

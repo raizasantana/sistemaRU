@@ -24,18 +24,23 @@ private DepartamentoGateway departamentoGateway;
 		return departamentos;
 	}
 	
-	public boolean inserirDepartamento(String nome, String sigla){
-		departamentoGateway.insert(nome, sigla);
-		return false;
+	public boolean inserirDepartamento(String nome, String sigla) throws SQLException {
+		try {
+			return departamentoGateway.insert(nome, sigla);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
-	public void alterarDepartamento(int id, String nome, String sigla) throws Exception {
+	public boolean alterarDepartamento(int id, String nome, String sigla) throws Exception {
 		if(nome.equals("") || sigla.equals(""))
 			throw new Exception("Dados inválidos");
 		if(departamentoGateway.find(sigla, id))
 			throw new Exception("Departamento de mesma sigla já cadastrado");
 		
 		departamentoGateway.update(id, nome, sigla);
+		return true;
 	}
 	
 	public Departamento getDepartamento(int id){

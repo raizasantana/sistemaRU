@@ -14,7 +14,7 @@ public class RefeicaoGateway {
 	
 Connection con = ConnectionFactory.getConnection();
 	
-	public void insert(String turno, String descricao, String opVegan, String tipo){
+	public boolean insert(String turno, String descricao, String opVegan, String tipo) throws SQLException{
 		String sql = "INSERT INTO refeicao (turno, descricao, opcao_vegetariana, tipo) " +
 				"VALUES (?,?,?,?)";
 		
@@ -28,23 +28,12 @@ Connection con = ConnectionFactory.getConnection();
 			prst.executeUpdate();
 			
 			prst.close();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		} 		
 			
-	}
-	
-	public void delete(Integer idRefeicao) throws SQLException{
-		String sql = "DELETE FROM refeicao " +
-				"WHERE id = ?";
-		
-		PreparedStatement prst = con.prepareStatement(sql);
-		prst.setInt(1, idRefeicao);
-		
-		prst.executeUpdate();
-		
-		prst.close();
-		
 	}
 	
 	public ArrayList<Refeicao> findAll() throws SQLException{
@@ -112,7 +101,7 @@ Connection con = ConnectionFactory.getConnection();
 		return refeicao;
 	}
 	
-	public void update(int id, String descricao, String opVegan){
+	public boolean update(int id, String descricao, String opVegan) throws SQLException{
 		String sql = "UPDATE refeicao SET descricao = ?, opcao_vegetariana = ? WHERE ID = ?";
 		
 		try {
@@ -124,8 +113,10 @@ Connection con = ConnectionFactory.getConnection();
 			prst.executeUpdate();
 			
 			prst.close();
+			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw e;
 		}
 	}
 }

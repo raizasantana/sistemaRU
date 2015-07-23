@@ -1,6 +1,7 @@
 package br.ccomp.servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -188,7 +189,11 @@ public class ServletConsumidor extends HttpServlet{
 		
 		TransactionScriptConsumidor cons = new TransactionScriptConsumidor();
 		
-		cons.atualizarConsumidor(id, ano, matricula, nome, sexo);
+		try {
+			cons.atualizarConsumidor(id, ano, matricula, nome, sexo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		listarConsumidores(request, response);
 		

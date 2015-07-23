@@ -1,15 +1,27 @@
 package br.ccomp.transactionTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ccomp.modelo.Consumidor;
+import br.ccomp.modelo.Sexo;
+import br.ccomp.modelo.Titulo;
+import br.ccomp.transactions.TransactionScriptConsumidor;
+
 public class TransactionScriptConsumidorTest {
+
+	private TransactionScriptConsumidor TSC;
 
 	@Before
 	public void setUp() throws Exception {
+		TSC = new TransactionScriptConsumidor();
 	}
 
 	@After
@@ -18,52 +30,60 @@ public class TransactionScriptConsumidorTest {
 
 	@Test
 	public void testIsValidCPF() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testTransactionScriptConsumidor() {
-		fail("Not yet implemented");
+		boolean test = TSC.isValidCPF("39612499543");
+		assertEquals(test,true);
 	}
 
 	@Test
 	public void testCriarAluno() {
-		fail("Not yet implemented");
+		boolean test = TSC.criarAluno(1, "jorandom", "50840922833", 123456, 2005, "MASCULINO");
+		assertEquals(test,true);
 	}
 
 	@Test
 	public void testCriarFuncionario() {
-		fail("Not yet implemented");
+		boolean test = TSC.criarFuncionario(1, "marandom", "38284420481", "DOUTORADO", 654321, 2005, "FEMININO");
+		assertEquals(test,true);
 	}
 
 	@Test
 	public void testListarConsumidores() {
-		fail("Not yet implemented");
+		boolean test = TSC.listarConsumidores() instanceof ArrayList<?>;
+		assertEquals(test,true);
 	}
 
 	@Test
 	public void testGetConsumidor() {
-		fail("Not yet implemented");
+		boolean test = TSC.getConsumidor(1) instanceof Consumidor;
+		assertEquals(test,true);
 	}
 
 	@Test
 	public void testAtualizarConsumidor() {
-		fail("Not yet implemented");
+		try {
+			boolean test = TSC.atualizarConsumidor(1, 2006, 54321, "Rafandom", "FEMININO");
+			assertEquals(test,true);
+		} catch (SQLException e) {
+			fail("SQL Exception Thrown");
+		}
 	}
 
 	@Test
 	public void testGetTitulo() {
-		fail("Not yet implemented");
+		boolean test = TSC.getTitulo("DOUTORADO") instanceof Titulo;
+		assertEquals(test,true);
 	}
 
 	@Test
 	public void testGetSexo() {
-		fail("Not yet implemented");
+		boolean test = TSC.getSexo("MASCULINO") instanceof Sexo;
+		assertEquals(test,true);
 	}
 
 	@Test
 	public void testGetConsumidorMatricula() {
-		fail("Not yet implemented");
+		boolean test = TSC.getConsumidorMatricula(12345) instanceof Consumidor;
+		assertEquals(test,true);
 	}
 
 }
