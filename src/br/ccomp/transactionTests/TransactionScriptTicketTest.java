@@ -33,7 +33,7 @@ public class TransactionScriptTicketTest {
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSR.alterarRefeicao(1, "Pão de Sal", "");
+		TST.alterarTicket(1,true);
 		String sql = "DELETE FROM ticket WHERE id_consumidor in (SELECT id from consumidor where matricula = 54321)";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
