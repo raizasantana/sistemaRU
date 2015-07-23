@@ -3,11 +3,15 @@ package br.ccomp.transactionTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ccomp.gateway.ConnectionFactory;
 import br.ccomp.modelo.Ticket;
 import br.ccomp.transactions.TransactionScriptConsumidor;
 import br.ccomp.transactions.TransactionScriptRefeicao;
@@ -25,11 +29,23 @@ public class TransactionScriptTicketTest {
 		TSC = new TransactionScriptConsumidor();
 		TSR = new TransactionScriptRefeicao();
 	}
+	
+	@After
+	public void tearDown() throws Exception {
+		Connection con = ConnectionFactory.getConnection();
+		TSR.alterarRefeicao(1, "Pão de Sal", "");
+		String sql = "DELETE FROM ticket WHERE id_consumidor in (SELECT id from consumidor where matricula = 54321)";
+		
+		PreparedStatement prst = con.prepareStatement(sql);
+		
+		prst.executeUpdate();
+		prst.close();
+	}
 
 	@Test
 	public void testInserirTicket() {
 		try {
-			boolean test = TST.inserirTicket(TSC.getConsumidorMatricula(12345), TSR.recuperarRefeicao(1), 1);
+			boolean test = TST.inserirTicket(TSC.getConsumidorMatricula(54321), TSR.recuperarRefeicao(1), 1);
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());

@@ -3,6 +3,8 @@ package br.ccomp.transactionTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ccomp.gateway.ConnectionFactory;
 import br.ccomp.modelo.Consumidor;
 import br.ccomp.modelo.Sexo;
 import br.ccomp.modelo.Titulo;
@@ -26,6 +29,14 @@ public class TransactionScriptConsumidorTest {
 
 	@After
 	public void tearDown() throws Exception {
+		Connection con = ConnectionFactory.getConnection();
+		TSC.atualizarConsumidor(2, 2010, 54321, "Rafael", "MASCULINO");
+		String sql = "DELETE FROM CONSUMIDOR WHERE nome = 'jorandom' OR nome = 'marandom'";
+		
+		PreparedStatement prst = con.prepareStatement(sql);
+		
+		prst.executeUpdate();
+		prst.close();
 	}
 
 	@Test
@@ -54,14 +65,14 @@ public class TransactionScriptConsumidorTest {
 
 	@Test
 	public void testGetConsumidor() {
-		boolean test = TSC.getConsumidor(1) instanceof Consumidor;
+		boolean test = TSC.getConsumidor(2) instanceof Consumidor;
 		assertEquals(test,true);
 	}
 
 	@Test
 	public void testAtualizarConsumidor() {
 		try {
-			boolean test = TSC.atualizarConsumidor(1, 2006, 54321, "Rafandom", "FEMININO");
+			boolean test = TSC.atualizarConsumidor(2, 2010, 54321, "Rafaela", "FEMININO");
 			assertEquals(test,true);
 		} catch (SQLException e) {
 			fail("SQL Exception Thrown");
