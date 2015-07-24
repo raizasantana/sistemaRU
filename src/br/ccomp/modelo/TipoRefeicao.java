@@ -2,7 +2,11 @@ package br.ccomp.modelo;
 
 public enum TipoRefeicao {
 
-	DEJEJUM,
+	DESJEJUM,
 	ALMOCO,
-	JANTAR;
+	JANTA;
+	
+	public String getNome(){
+		return this.name();
+	}
 }

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="br.ccomp.modelo.Departamento" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Departamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="278" width="195" x="152" y="1702"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="br.ccomp.modelo.Curso" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Curso.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="296" width="232" x="288" y="1366"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="3" language="java" name="br.ccomp.modelo.Sexo" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Sexo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="134" width="137" x="-25" y="1174"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="4" language="java" name="br.ccomp.modelo.Titulo" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Titulo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="152" width="165" x="606" y="1174"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="5" language="java" name="br.ccomp.modelo.Funcionario" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Funcionario.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="134" width="232" x="152" y="1174"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="br.ccomp.modelo.Consumidor" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Consumidor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="548" width="280" x="424" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="br.ccomp.modelo.Aluno" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Aluno.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="134" width="142" x="424" y="1174"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="8" language="java" name="br.ccomp.modelo.Turno" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Turno.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="152" width="137" x="811" y="1174"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="9" language="java" name="br.ccomp.modelo.TipoRefeicao" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/TipoRefeicao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="152" width="169" x="988" y="1174"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="10" language="java" name="br.ccomp.modelo.Refeicao" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Refeicao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="350" width="277" x="811" y="586"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="br.ccomp.modelo.Ticket" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/modelo/Ticket.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="332" width="275" x="618" y="214"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="br.ccomp.servlets.ServletDepartamento" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/servlets/ServletDepartamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="394" x="1587" y="304"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="br.ccomp.servlets.ServletCurso" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/servlets/ServletCurso.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="224" width="391" x="2021" y="304"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="br.ccomp.servlets.ServletRefeicao" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/servlets/ServletRefeicao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="224" width="367" x="2452" y="304"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="br.ccomp.servlets.ServletConsumidor" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/servlets/ServletConsumidor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="434" x="2859" y="304"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="br.ccomp.servlets.ServletTicket" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/servlets/ServletTicket.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="224" width="390" x="3333" y="304"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="br.ccomp.transactions.TransactionScriptRefeicao" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/transactions/TransactionScriptRefeicao.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="343" x="2129" y="1003"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="br.ccomp.transactions.TransactionScriptTicket" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/transactions/TransactionScriptTicket.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="188" width="276" x="2512" y="1003"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="br.ccomp.transactions.TransactionScriptConsumidor" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/transactions/TransactionScriptConsumidor.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="242" width="356" x="2828" y="1003"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="br.ccomp.transactions.TransactionScriptGateway" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/transactions/TransactionScriptGateway.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="80" width="205" x="3491" y="1003"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="br.ccomp.transactions.TransactionScriptCurso" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/transactions/TransactionScriptCurso.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="170" width="227" x="3224" y="1003"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="br.ccomp.transactions.TransactionScriptDepartamento" project="Comp3RU" 
+    file="/Comp3RU/src/br/ccomp/transactions/TransactionScriptDepartamento.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="134" width="287" x="3736" y="1003"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="23">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="24">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="25" name="departamento"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="27">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="28" name="turno"/>      
+      <multiplicity id="29" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="30">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="31" name="consumidor"/>      
+      <multiplicity id="32" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="33">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="34" name="curso"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="37">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="38" name="sexo"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="41" name="refeicao"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="44" name="tipo"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <bendpoint x="161" y="1366"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="47" name="departamento"/>      
+      <multiplicity id="48" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="50" name="titulo"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
