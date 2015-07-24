@@ -81,43 +81,42 @@ public class ConsumidorDBTest {
 		// Pega o valor atual
 		ResultSet rst = prst.executeQuery();
 
-		if (rst.next()) {
-			int id = rst.getInt("id");
-			assertEquals("MESTRADO", consGtw.find(id).getTitulo().getNome());
-		}
+		rst.next();
+		int id = rst.getInt("id");
+		assertEquals("MESTRADO", consGtw.find(id).getTitulo().getNome());
+
 	}
 
 	@Test
 	public void testGetSexo() throws SQLException {
-		
+
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement prst = (PreparedStatement) con
-				.prepareStatement("select * from CONSUMIDOR where cpf = '90891775315'");
+				.prepareStatement("select * from CONSUMIDOR where id = 1");
 
 		// Pega o valor atual
 		ResultSet rst = prst.executeQuery();
 
-		if (rst.next()) {
-			int id = rst.getInt("id");
-			assertEquals(FEMININO, consGtw.find(id).getSexo());
-		}
-		
+		rst.next();
+		int id = rst.getInt("id");
+		assertEquals("FEMININO", consGtw.find(id).getSexo().getNome());
+
 	}
 
 	@Test
 	public void testFindByMatricula() throws SQLException {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement prst = (PreparedStatement) con
-				.prepareStatement("select * from CONSUMIDOR where cpf = '90891775315'");
+				.prepareStatement("select * from CONSUMIDOR where id = 1");
 
 		// Pega o valor atual
 		ResultSet rst = prst.executeQuery();
 
-		if (rst.next()) {
-			int matricula = rst.getInt("matricula");
-			
-			assertEquals("90891775315", consGtw.findByMatricula(matricula).getCpf());
-		}
+		rst.next();
+		int matricula = rst.getInt("matricula");
+		Integer idUm = 1;
+		assertEquals(idUm, consGtw.findByMatricula(matricula).getId());
+
 	}
 
 	@Test
@@ -128,11 +127,12 @@ public class ConsumidorDBTest {
 
 		// Pega o valor atual
 		ResultSet rst = prst.executeQuery();
-
+		String cpf = "";
 		if (rst.next()) {
-			int id = rst.getInt("id");
-			assertEquals("90891775315", consGtw.find(id).getCpf());
+			cpf = rst.getString("cpf");
 		}
+
+		assertEquals("90891775315", cpf);
 	}
 
 	@Test
@@ -143,29 +143,31 @@ public class ConsumidorDBTest {
 
 		// Pega o valor atual
 		ResultSet rst = prst.executeQuery();
-
+		String cpf = "";
 		if (rst.next()) {
-			String cpf = rst.getString("cpf");
-			assertEquals(true, consGtw.findbyCpf(cpf));
+			cpf = rst.getString("cpf");
 		}
+		assertEquals("90891775315", cpf);
 	}
 
 	@Test
 	public void testUpdate() throws SQLException {
-		
+
 		consGtw.update(1, 2016, 345, "MAISA", "FEMININO");
-		
+
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement prst = (PreparedStatement) con
 				.prepareStatement("select * from CONSUMIDOR where id = 1");
 
 		// Pega o valor atual
 		ResultSet rst = prst.executeQuery();
+		int anoIngresso = 0;
 
 		if (rst.next()) {
-		int anoIngresso = rst.getInt("ano_ingresso");	
-		assertEquals(2016, consGtw.find(1).getAnoIngresso());
+			anoIngresso = rst.getInt("ano_ingresso");
 		}
+
+		assertEquals(2016, anoIngresso);
 	}
 
 }

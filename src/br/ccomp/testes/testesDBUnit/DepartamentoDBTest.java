@@ -1,7 +1,8 @@
-package br.ccomp.dbUnitTests;
+package br.ccomp.testes.testesDBUnit;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,6 +24,8 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.mysql.jdbc.PreparedStatement;
+
 import br.ccomp.gateway.ConnectionFactory;
 import br.ccomp.gateway.CursoGateway;
 import br.ccomp.gateway.DepartamentoGateway;
@@ -42,41 +45,97 @@ public class DepartamentoDBTest extends TestCase{
     @Test
     public void testFindBySigla() throws Exception
     {
-    	assertEquals(true,dG.find("DCC"));
+    	Connection con = ConnectionFactory.getConnection();
+		PreparedStatement prst = (PreparedStatement) con
+				.prepareStatement("select * from DEPARTAMENTO where id = 1");
+
+		// Pega o valor atual
+		ResultSet rst = prst.executeQuery();
+		String sigla = "";
+		
+		if (rst.next()) {
+			sigla = rst.getString("sigla");
+		}
+    	assertEquals(true,dG.find(sigla));
+    	
+    	prst.close();
+    	rst.close();
     }
     
     @Test 
     public void testFindByID() throws SQLException
     {
-    	Departamento d = new Departamento();
-    	d.setId(1);
-    	assertEquals(d.getId(), dG.find(1).getId());
+    	Connection con = ConnectionFactory.getConnection();
+		PreparedStatement prst = (PreparedStatement) con
+				.prepareStatement("select * from DEPARTAMENTO where id = 1");
+
+		// Pega o valor atual
+		ResultSet rst = prst.executeQuery();
+		rst.next();
+		
+		Integer id = rst.getInt("id");
+    	
+    	assertEquals(id, dG.find(1).getId());
+    	
+    	prst.close();
+    	rst.close();
     }
 	
     @Test 
     public void testFindBySiglaEId() throws SQLException
     {
-    	Departamento d = new Departamento();
-    	d.setId(1);
-    	d.setSigla("DP1");
-    	assertEquals(false, dG.find("DP1",1));
+    	Connection con = ConnectionFactory.getConnection();
+		PreparedStatement prst = (PreparedStatement) con
+				.prepareStatement("select * from DEPARTAMENTO where id = 1");
+
+		// Pega o valor atual
+		ResultSet rst = prst.executeQuery();
+		rst.next();		
+		Integer id = rst.getInt("id");
+		String sigla = rst.getString("sigla");
+    	assertEquals(false, dG.find(sigla, id));
+    	
+    	prst.close();
+    	rst.close();
     }
 	
     @Test
      public void testInsert() throws Exception
      {
     	dG.insert("Departamento de Matematica","DMat");
-    	assertEquals(true, dG.find("DMat"));
+    	
+    	Connection con = ConnectionFactory.getConnection();
+		PreparedStatement prst = (PreparedStatement) con
+				.prepareStatement("select * from DEPARTAMENTO where sigla = 'DMat'");
+
+		// Pega o valor atual
+		ResultSet rst = prst.executeQuery();
+		rst.next();
+	
+		assertEquals("DMat", rst.getString("sigla"));
+		prst.close();
+		
+    	
      }
     
     @Test
     public void testUpdate() throws SQLException
     {
- 	   Departamento d = dG.find(2);
- 	   d.setSigla("DPX");
- 	   dG.update(d.getId(),d.getNome(),d.getSigla());
+ 	   dG.update(1,"Departamento Teste 1","DT1");
  	   
- 	   assertEquals(true,dG.find("DPX"));
+ 	  Connection con = ConnectionFactory.getConnection();
+	   PreparedStatement prst = (PreparedStatement) con
+				.prepareStatement("select * from DEPARTAMENTO where id = 1");
+
+		// Pega o valor atual
+		ResultSet rst = prst.executeQuery();
+		String sigla = "";
+		if (rst.next()) {
+			sigla = rst.getString("sigla");
+		}
+		
+		assertEquals("DT1", sigla);
+ 	   
     }
 
 }
