@@ -14,6 +14,13 @@ import br.ccomp.modelo.Consumidor;
 import br.ccomp.modelo.Curso;
 import br.ccomp.modelo.Departamento;
 import br.ccomp.modelo.Titulo;
+import br.ccomp.transactions.RoteiroAtualizaConsumidor;
+import br.ccomp.transactions.RoteiroBuscaConsumidor;
+import br.ccomp.transactions.RoteiroCriarAluno;
+import br.ccomp.transactions.RoteiroCriarFuncionario;
+import br.ccomp.transactions.RoteiroListaCurso;
+import br.ccomp.transactions.RoteiroListaDepartamento;
+import br.ccomp.transactions.RoteiroListarConsumidores;
 import br.ccomp.transactions.TransactionScriptConsumidor;
 import br.ccomp.transactions.TransactionScriptCurso;
 import br.ccomp.transactions.TransactionScriptDepartamento;
@@ -92,13 +99,18 @@ public class ServletConsumidor extends HttpServlet{
 		String tipo = (String) request.getParameter("tipo");
 		String message = null;
 		
-		TransactionScriptConsumidor tsConsumidor = new TransactionScriptConsumidor();
+		
 		
 		try {
-			if (tipo.equals("aluno")) //Criar aluno			
-				tsConsumidor.criarAluno(Integer.valueOf(curso), nome, cpf,Integer.valueOf(matricula), Integer.valueOf(anoIngresso), sexo);		
-			else 
-				tsConsumidor.criarFuncionario(Integer.valueOf(departamento), nome, cpf, titulo, Integer.valueOf(matricula), Integer.valueOf(anoIngresso), sexo);
+			if (tipo.equals("aluno")){ //Criar aluno
+				RoteiroCriarAluno roteiroAluno = new RoteiroCriarAluno();
+				roteiroAluno.execute(Integer.valueOf(curso), nome, cpf,Integer.valueOf(matricula), Integer.valueOf(anoIngresso), sexo);
+			}
+			else {
+				RoteiroCriarFuncionario roteiroFuncionario = new RoteiroCriarFuncionario();
+				roteiroFuncionario.execute(Integer.valueOf(departamento), nome, cpf, titulo, Integer.valueOf(matricula), Integer.valueOf(anoIngresso), sexo);
+			}
+				
 			message = "Inserido com sucesso";
 		} catch(Exception e){
 			message = e.getMessage();
@@ -111,11 +123,13 @@ public class ServletConsumidor extends HttpServlet{
 	
 	public void listarCursosDepartamentos(HttpServletRequest request, HttpServletResponse response)
 	{
-		TransactionScriptCurso tsCurso = new TransactionScriptCurso();
-		TransactionScriptDepartamento tsDepartamento = new TransactionScriptDepartamento();
 		
-		ArrayList<Curso> cursos = tsCurso.listarCurso();
-		ArrayList<Departamento> deps = tsDepartamento.listarDepartamentos();
+		RoteiroListaCurso listarCurso = new RoteiroListaCurso();
+		RoteiroListaDepartamento listarDepartamento = new RoteiroListaDepartamento();
+		
+
+		ArrayList<Curso> cursos = listarCurso.execute();
+		ArrayList<Departamento> deps = listarDepartamento.execute();
 		
 		ArrayList<String> titulos = new ArrayList<String>(); 
 		titulos.add(Titulo.DOUTORADO.getNome());
@@ -136,8 +150,9 @@ public class ServletConsumidor extends HttpServlet{
 	
 	public void listarConsumidores(HttpServletRequest request, HttpServletResponse response)
 	{
-		TransactionScriptConsumidor cons = new TransactionScriptConsumidor();
-		ArrayList<Consumidor> consumids = cons.listarConsumidores();
+	
+		RoteiroListarConsumidores listarConsumidores = new RoteiroListarConsumidores();
+		ArrayList<Consumidor> consumids = listarConsumidores.execute();
 		
 		request.setAttribute("consumidores", consumids);
 		
@@ -150,9 +165,10 @@ public class ServletConsumidor extends HttpServlet{
 	}
 	
 	private void getConsumidor(HttpServletRequest request, HttpServletResponse response) {
-		TransactionScriptConsumidor cons = new TransactionScriptConsumidor();
 		
-		Consumidor c = cons.getConsumidor(Integer.valueOf(request.getParameter("id")));
+		RoteiroBuscaConsumidor buscaConsumidor = new RoteiroBuscaConsumidor();
+		Consumidor c = buscaConsumidor.execute(Integer.valueOf(request.getParameter("id")));
+		
 		
 		request.setAttribute("consumidor", c);
 		
@@ -186,11 +202,11 @@ public class ServletConsumidor extends HttpServlet{
 		int matricula = Integer.valueOf((String) request.getParameter("matricula"));
 		int ano = Integer.valueOf((String) request.getParameter("ano"));
 		
+		RoteiroAtualizaConsumidor atualizarConsumidor = new RoteiroAtualizaConsumidor();
 		
-		TransactionScriptConsumidor cons = new TransactionScriptConsumidor();
 		
 		try {
-			cons.atualizarConsumidor(id, ano, matricula, nome, sexo);
+			atualizarConsumidor.execute(id, ano, matricula, nome, sexo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

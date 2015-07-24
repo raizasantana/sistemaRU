@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.ccomp.modelo.Curso;
 import br.ccomp.modelo.Departamento;
+import br.ccomp.transactions.RoteiroAtualizaCurso;
+import br.ccomp.transactions.RoteiroBuscaCurso;
+import br.ccomp.transactions.RoteiroCriaCurso;
+import br.ccomp.transactions.RoteiroListaCurso;
+import br.ccomp.transactions.RoteiroListaDepartamento;
 import br.ccomp.transactions.TransactionScriptCurso;
 import br.ccomp.transactions.TransactionScriptDepartamento;
 
@@ -78,10 +83,10 @@ public class ServletCurso extends HttpServlet{
 		
 		String message = null;
 		
-		TransactionScriptCurso transactionScriptCurso = new TransactionScriptCurso();
+		RoteiroCriaCurso criarCurso = new RoteiroCriaCurso();
 		
 		try{
-			transactionScriptCurso.inserirCurso(nome, sigla, idDepartamento);
+			criarCurso.execute(nome, sigla, idDepartamento);
 			message = "Inserido com sucesso";
 		} catch (Exception e) {
 			message = e.getMessage();
@@ -95,20 +100,20 @@ public class ServletCurso extends HttpServlet{
 	private void editarCurso(HttpServletRequest request, HttpServletResponse response){
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		TransactionScriptCurso transactionScriptCurso = new TransactionScriptCurso();
-		TransactionScriptDepartamento transactionScriptDepartamento = new TransactionScriptDepartamento();
+		RoteiroBuscaCurso buscaCurso = new RoteiroBuscaCurso();
+		RoteiroListaDepartamento listaDepartamento = new RoteiroListaDepartamento();
 		
 		String message = null;
 		
 		try{
-			Curso curso = transactionScriptCurso.getCurso(id);
+			Curso curso = buscaCurso.execute(id);
 			request.setAttribute("response", message);
 			request.setAttribute("curso_id", curso.getId());
 			request.setAttribute("curso_nome", curso.getNome());
 			request.setAttribute("curso_sigla", curso.getSigla());
 			request.setAttribute("curso_id_departamento", curso.getDepartamento().getId());
 			
-			ArrayList<Departamento> departamentos = transactionScriptDepartamento.listarDepartamentos();
+			ArrayList<Departamento> departamentos = listaDepartamento.execute();
 			request.setAttribute("departamentos", departamentos);
 			
 		} catch (Exception e){
@@ -130,12 +135,13 @@ public class ServletCurso extends HttpServlet{
 		String sigla = (String) request.getParameter("sigla");
 		int idDepartamento = Integer.parseInt(request.getParameter("departamentos"));
 		
-		TransactionScriptCurso transactionScriptCurso = new TransactionScriptCurso();
+		
+		RoteiroAtualizaCurso atualizaCurso = new RoteiroAtualizaCurso();
 		
 		String message = null;
 		
 		try{
-			transactionScriptCurso.alterarCurso(id, nome, sigla, idDepartamento);
+			atualizaCurso.execute(id, nome, sigla, idDepartamento);
 			message = "Alterado com sucesso";
 		} catch (Exception e) {
 			message = e.getMessage();
@@ -147,9 +153,9 @@ public class ServletCurso extends HttpServlet{
 	}
 	
 	private void listarCursos(HttpServletRequest request, HttpServletResponse response){
-		TransactionScriptCurso transactionScriptCurso = new TransactionScriptCurso();
 		
-		ArrayList<Curso> cursos = transactionScriptCurso.listarCurso();
+		RoteiroListaCurso listaCurso = new RoteiroListaCurso();
+		ArrayList<Curso> cursos = listaCurso.execute();
 		request.setAttribute("cursos", cursos);
 		
 		try {
