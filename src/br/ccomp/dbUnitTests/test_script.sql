@@ -1,7 +1,7 @@
 insert into DEPARTAMENTO values(1, "Departamento 1", "DP1");
 insert into DEPARTAMENTO values(2, "Departamento 2", "DP2");
 insert into CURSO values(1, "Ciencia da Computacao", "CComp",1);
-insert into REFEICAO values(1, "MANHA","REFEICAO 1", "DESJEJUM");
+insert into REFEICAO values(1, "MANHA","REFEICAO 1", "","DESJEJUM");
 insert into REFEICAO values(2, "TARDE","REFEICAO 2", "", "ALMOCO");
 insert into REFEICAO values(3, "NOITE","REFEICAO 2", "", "JANTAR");
 

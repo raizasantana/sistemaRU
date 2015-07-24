@@ -65,12 +65,28 @@ public class CursoDBTest extends TestCase{
    @Test
    public void testUpdate() throws SQLException
    {
-	   Curso c = cG.find(3);
+	   Curso c = cG.find(2);
 	   c.setSigla("ABC");
 	   cG.update(c.getId(),c.getNome(),c.getSigla(), c.getDepartamento().getId());
 	   
 	   assertEquals(true,cG.find("ABC"));
    }
+   
+   @Test
+   public void testMesmaSiglaAcha() throws SQLException
+   {
+	   assertEquals(true, cG.find(3,"EComp"));
+   
+   }
+   
+   
+   @Test
+   public void testMesmaSiglaNaoAcha() throws SQLException
+   {
+	   assertEquals(true, cG.find(44,"EComp"));
+   }
+   
+
  
     
     
