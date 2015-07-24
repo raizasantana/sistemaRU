@@ -14,7 +14,6 @@ import br.ccomp.transactions.RoteiroAtualizarDepartamento;
 import br.ccomp.transactions.RoteiroBuscaDepartamento;
 import br.ccomp.transactions.RoteiroCriaDepartamento;
 import br.ccomp.transactions.RoteiroListaDepartamento;
-import br.ccomp.transactions.TransactionScriptDepartamento;
 
 @WebServlet("/departamento")
 public class ServletDepartamento extends HttpServlet{
@@ -72,8 +71,7 @@ public class ServletDepartamento extends HttpServlet{
 		String sigla = (String) request.getParameter("sigla");
 		
 		String message = null;
-		
-		
+				
 		RoteiroCriaDepartamento criaDepartamento = new RoteiroCriaDepartamento();
 		
 		try{
@@ -111,8 +109,7 @@ public class ServletDepartamento extends HttpServlet{
 	
 	private void editarDepartamento(HttpServletRequest request, HttpServletResponse response){
 		int id = Integer.parseInt(request.getParameter("id"));
-		
-		
+				
 		RoteiroBuscaDepartamento buscaDepartamento = new RoteiroBuscaDepartamento();
 		
 		String message = null;

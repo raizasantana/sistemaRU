@@ -51,6 +51,6 @@ public class RefeicaoTest {
 		
 		assertEquals(TipoRefeicao.ALMOCO, refeicao.getTipo());
 		assertNotEquals(TipoRefeicao.DESJEJUM, refeicao.getTipo());
-		assertNotEquals(TipoRefeicao.JANTA, refeicao.getTipo());
+		assertNotEquals(TipoRefeicao.JANTAR, refeicao.getTipo());
 	}
 }

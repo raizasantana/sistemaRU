@@ -16,22 +16,31 @@ import br.ccomp.gateway.ConnectionFactory;
 import br.ccomp.modelo.Refeicao;
 import br.ccomp.modelo.TipoRefeicao;
 import br.ccomp.modelo.Turno;
-import br.ccomp.transactions.TransactionScriptRefeicao;
+import br.ccomp.transactions.RoteiroAtualizaRefeicao;
+import br.ccomp.transactions.RoteiroBuscarRefeicao;
+import br.ccomp.transactions.RoteiroCriaRefeicao;
+import br.ccomp.transactions.RoteiroListaRefeicao;
 
 public class TransactionScriptRefeicaoTest {
 
-	TransactionScriptRefeicao TSR;
+	private RoteiroAtualizaRefeicao RAR;
+	private RoteiroBuscarRefeicao RBR;
+	private RoteiroCriaRefeicao RCR;
+	private RoteiroListaRefeicao RLR;
 	
 	@Before
 	public void setUp() throws Exception {
-		TSR = new TransactionScriptRefeicao();
+		RAR = new RoteiroAtualizaRefeicao();
+		RBR = new RoteiroBuscarRefeicao();
+		RCR = new RoteiroCriaRefeicao();
+		RLR = new RoteiroListaRefeicao();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSR.alterarRefeicao(1, "Pï¿½o de Sal", "");
-		String sql = "DELETE FROM REFEICAO WHERE descricao = 'Pï¿½o com Manteiga'";
+		RAR.execute(1, "Pão de Sal", "");
+		String sql = "DELETE FROM REFEICAO WHERE descricao = 'Pão com Manteiga'";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
 		
@@ -42,7 +51,7 @@ public class TransactionScriptRefeicaoTest {
 	@Test
 	public void testInserirRefeicao() {
 		try {
-			boolean test = TSR.inserirRefeicao("Pï¿½o com Manteiga", "", TipoRefeicao.DESJEJUM, Turno.MANHA);
+			boolean test = RCR.execute("Pão com Manteiga", "", TipoRefeicao.DESJEJUM, Turno.MANHA);
 			assertEquals(test,true);
 		} catch (SQLException e) {
 			fail(e.getMessage());
@@ -51,20 +60,20 @@ public class TransactionScriptRefeicaoTest {
 
 	@Test
 	public void testListarRefeicao() {
-		boolean test = TSR.listarRefeicao() instanceof ArrayList<?>;
+		boolean test = RLR.execute() instanceof ArrayList<?>;
 		assertEquals(test,true);
 	}
 
 	@Test
 	public void testRecuperarRefeicao() {
-		boolean test = TSR.recuperarRefeicao(2) instanceof Refeicao;
+		boolean test = RBR.execute(2) instanceof Refeicao;
 		assertEquals(test,true);
 	}
 
 	@Test
 	public void testAlterarRefeicao() {
 		try {
-			boolean test = TSR.alterarRefeicao(1, "Pï¿½o sem Sal", "Agua");
+			boolean test = RAR.execute(1, "Pão sem Sal", "Agua");
 			assertEquals(test,true);
 		} catch (SQLException e) {
 			fail(e.getMessage());

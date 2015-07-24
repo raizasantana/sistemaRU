@@ -17,7 +17,6 @@ import br.ccomp.transactions.RoteiroAtualizaRefeicao;
 import br.ccomp.transactions.RoteiroBuscarRefeicao;
 import br.ccomp.transactions.RoteiroCriaRefeicao;
 import br.ccomp.transactions.RoteiroListaRefeicao;
-import br.ccomp.transactions.TransactionScriptRefeicao;
 
 @WebServlet("/refeicao")
 public class ServletRefeicao extends HttpServlet{
@@ -99,13 +98,12 @@ public class ServletRefeicao extends HttpServlet{
 		
 		String message = null;
 		
-		
 		RoteiroCriaRefeicao criaRefeicao = new RoteiroCriaRefeicao();
 		try {
 			if (criaRefeicao.execute(descricao, opcaoVegetariana, tipo, turno))
 				message = "Inserido com sucesso";
 			else
-				message = "Refeicao nao pode ser cadastrada";
+				message = "Refeicao não pode ser cadastrada";
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -117,8 +115,7 @@ public class ServletRefeicao extends HttpServlet{
 	
 	private void editarRefeicao(HttpServletRequest request, HttpServletResponse response){
 		int id = Integer.parseInt(request.getParameter("id"));
-		
-		
+				
 		RoteiroBuscarRefeicao buscaRefeicao = new RoteiroBuscarRefeicao();
 		Refeicao refeicao = buscaRefeicao.execute(id);
 		
@@ -173,8 +170,7 @@ public class ServletRefeicao extends HttpServlet{
 		int id = Integer.parseInt(request.getParameter("id"));
 		String descricao = (String) request.getParameter("descricao");
 		String opVegan = (String) request.getParameter("opVegan");
-				
-		
+						
 		RoteiroAtualizaRefeicao atualizarRefeicao = new RoteiroAtualizaRefeicao();
 		
 		String message = null;

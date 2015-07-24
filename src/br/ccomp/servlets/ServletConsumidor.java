@@ -21,9 +21,6 @@ import br.ccomp.transactions.RoteiroCriarFuncionario;
 import br.ccomp.transactions.RoteiroListaCurso;
 import br.ccomp.transactions.RoteiroListaDepartamento;
 import br.ccomp.transactions.RoteiroListarConsumidores;
-import br.ccomp.transactions.TransactionScriptConsumidor;
-import br.ccomp.transactions.TransactionScriptCurso;
-import br.ccomp.transactions.TransactionScriptDepartamento;
 
 @WebServlet("/consumidor")
 
@@ -98,9 +95,7 @@ public class ServletConsumidor extends HttpServlet{
 		String sexo = (String) request.getParameter("sexo");
 		String tipo = (String) request.getParameter("tipo");
 		String message = null;
-		
-		
-		
+				
 		try {
 			if (tipo.equals("aluno")){ //Criar aluno
 				RoteiroCriarAluno roteiroAluno = new RoteiroCriarAluno();
@@ -121,8 +116,7 @@ public class ServletConsumidor extends HttpServlet{
 		listarConsumidores(request, response);
 	}
 	
-	public void listarCursosDepartamentos(HttpServletRequest request, HttpServletResponse response)
-	{
+	public void listarCursosDepartamentos(HttpServletRequest request, HttpServletResponse response)	{
 		
 		RoteiroListaCurso listarCurso = new RoteiroListaCurso();
 		RoteiroListaDepartamento listarDepartamento = new RoteiroListaDepartamento();
@@ -148,8 +142,7 @@ public class ServletConsumidor extends HttpServlet{
 		
 	}
 	
-	public void listarConsumidores(HttpServletRequest request, HttpServletResponse response)
-	{
+	public void listarConsumidores(HttpServletRequest request, HttpServletResponse response) {
 	
 		RoteiroListarConsumidores listarConsumidores = new RoteiroListarConsumidores();
 		ArrayList<Consumidor> consumids = listarConsumidores.execute();
@@ -172,11 +165,11 @@ public class ServletConsumidor extends HttpServlet{
 		
 		request.setAttribute("consumidor", c);
 		
-		TransactionScriptCurso tsCurso = new TransactionScriptCurso();
-		TransactionScriptDepartamento tsDepartamento = new TransactionScriptDepartamento();
+		RoteiroListaCurso RLC = new RoteiroListaCurso();
+		RoteiroListaDepartamento RLD = new RoteiroListaDepartamento();
 		
-		ArrayList<Curso> cursos = tsCurso.listarCurso();
-		ArrayList<Departamento> deps = tsDepartamento.listarDepartamentos();
+		ArrayList<Curso> cursos = RLC.execute();
+		ArrayList<Departamento> deps = RLD.execute();
 		
 		ArrayList<String> titulos = new ArrayList<String>(); 
 		titulos.add(Titulo.DOUTORADO.getNome());
@@ -207,6 +200,8 @@ public class ServletConsumidor extends HttpServlet{
 		
 		try {
 			atualizarConsumidor.execute(id, ano, matricula, nome, sexo);
+			String message = "Atualizado com Sucesso";
+			request.setAttribute("response", message);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -21,9 +21,6 @@ import br.ccomp.transactions.RoteiroBuscarRefeicao;
 import br.ccomp.transactions.RoteiroCriarTicket;
 import br.ccomp.transactions.RoteiroListaRefeicao;
 import br.ccomp.transactions.RoteiroListarTicket;
-import br.ccomp.transactions.TransactionScriptConsumidor;
-import br.ccomp.transactions.TransactionScriptRefeicao;
-import br.ccomp.transactions.TransactionScriptTicket;
 
 @WebServlet("/ticket")
 public class ServletTicket extends HttpServlet {
@@ -147,10 +144,6 @@ public class ServletTicket extends HttpServlet {
 
 	private void editarTicket(HttpServletRequest request, HttpServletResponse response) {
 		int id = Integer.parseInt(request.getParameter("id"));
-		
-		TransactionScriptTicket transactionScriptTicket = new TransactionScriptTicket();
-		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
-		
 		RoteiroBuscaTicket buscaTicket = new RoteiroBuscaTicket();
 		RoteiroBuscarRefeicao buscaRefeicao = new RoteiroBuscarRefeicao();
 		
@@ -207,7 +200,6 @@ public class ServletTicket extends HttpServlet {
 		}
 		
 		request.setAttribute("response", message);
-		System.out.println("Passando: "+message);
 		
 		listarTicket(request, response);
 	}

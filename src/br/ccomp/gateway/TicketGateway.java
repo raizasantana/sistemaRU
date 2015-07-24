@@ -131,7 +131,7 @@ public class TicketGateway {
 	}
 
 	public Ticket find(Integer id) throws SQLException{
-		String sql = "SELECT * FROM TICKET t, REFEICAO r, CONSUMIDOR c " +
+		String sql = "SELECT * FROM TICKET t, refeicao r, consumidor c " +
 				"WHERE t.id = ? AND t.id_refeicao = r.id AND t.id_consumidor = c.id";
 		
 		PreparedStatement prst = con.prepareStatement(sql);

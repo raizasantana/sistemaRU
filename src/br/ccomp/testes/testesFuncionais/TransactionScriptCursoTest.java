@@ -13,21 +13,30 @@ import org.junit.Test;
 
 import br.ccomp.gateway.ConnectionFactory;
 import br.ccomp.modelo.Curso;
-import br.ccomp.transactions.TransactionScriptCurso;
+import br.ccomp.transactions.RoteiroAtualizaCurso;
+import br.ccomp.transactions.RoteiroBuscaCurso;
+import br.ccomp.transactions.RoteiroCriaCurso;
+import br.ccomp.transactions.RoteiroListaCurso;
 
 public class TransactionScriptCursoTest {
 
-	private TransactionScriptCurso TSC;
+	private RoteiroAtualizaCurso RAC;
+	private RoteiroBuscaCurso RBC;
+	private RoteiroCriaCurso RCC;
+	private RoteiroListaCurso RLC;
 	
 	@Before
 	public void setUp() throws Exception {
-		TSC = new TransactionScriptCurso();
+		RAC = new RoteiroAtualizaCurso();
+		RBC = new RoteiroBuscaCurso();
+		RCC = new RoteiroCriaCurso();
+		RLC = new RoteiroListaCurso();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSC.alterarCurso(1,"Ciencia da Computacaoo", "CComp", 1);
+		RAC.execute(1,"Ciencia da Computação", "CComp", 1);
 		String sql = "DELETE FROM CURSO WHERE nome = 'RandomStuff'";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -39,7 +48,7 @@ public class TransactionScriptCursoTest {
 	@Test
 	public void testInserirCurso() {
 		try {
-			boolean test = TSC.inserirCurso("RandomStuff", "RSt", 2);
+			boolean test = RCC.execute("RandomStuff", "RSt", 2);
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -49,7 +58,7 @@ public class TransactionScriptCursoTest {
 	@Test
 	public void testAlterarCurso() {
 		try {
-			boolean test = TSC.alterarCurso(1,"ALotOfRandomStuff", "AlRSt", 2);
+			boolean test = RAC.execute(1,"ALotOfRandomStuff", "AlRSt", 2);
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -59,7 +68,7 @@ public class TransactionScriptCursoTest {
 	@Test
 	public void testGetCurso() {
 		try {
-			boolean test = TSC.getCurso(1) instanceof Curso;
+			boolean test = RBC.execute(1) instanceof Curso;
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -68,7 +77,7 @@ public class TransactionScriptCursoTest {
 
 	@Test
 	public void testListarCurso() {
-		boolean test = TSC.listarCurso() instanceof ArrayList<?>;
+		boolean test = RLC.execute() instanceof ArrayList<?>;
 		assertEquals(test,true);
 	}
 

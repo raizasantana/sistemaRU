@@ -14,22 +14,31 @@ import org.junit.Test;
 
 import br.ccomp.gateway.ConnectionFactory;
 import br.ccomp.modelo.Departamento;
-import br.ccomp.transactions.TransactionScriptDepartamento;
+import br.ccomp.transactions.RoteiroAtualizarDepartamento;
+import br.ccomp.transactions.RoteiroBuscaDepartamento;
+import br.ccomp.transactions.RoteiroCriaDepartamento;
+import br.ccomp.transactions.RoteiroListaDepartamento;
 
 public class TransactionScriptDepartamentoTest {
 
-	TransactionScriptDepartamento TSD;
+	private RoteiroAtualizarDepartamento RAD;
+	private RoteiroBuscaDepartamento RBD;
+	private RoteiroCriaDepartamento RCD;
+	private RoteiroListaDepartamento RLD;
 	
 	@Before
 	public void setUp() throws Exception {
-		TSD = new TransactionScriptDepartamento();
+		RAD = new RoteiroAtualizarDepartamento();
+		RBD = new RoteiroBuscaDepartamento();
+		RCD = new RoteiroCriaDepartamento();
+		RLD = new RoteiroListaDepartamento();
 	}
 	
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSD.alterarDepartamento(1,"Departamento de Ciencia da Computaï¿½ï¿½o", "DCC");
-		String sql = "DELETE FROM DEPARTAMENTO WHERE nome = 'Departamento de Histï¿½ria'";
+		RAD.execute(1,"Departamento de Ciencia da Computação", "DCC");
+		String sql = "DELETE FROM DEPARTAMENTO WHERE nome = 'Departamento de História'";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
 		
@@ -39,14 +48,14 @@ public class TransactionScriptDepartamentoTest {
 
 	@Test
 	public void testListarDepartamentos() {
-		boolean test = TSD.listarDepartamentos() instanceof ArrayList<?>;
+		boolean test = RLD.execute() instanceof ArrayList<?>;
 		assertEquals(test,true);
 	}
 
 	@Test
 	public void testInserirDepartamento() {
 		try {
-			boolean test = TSD.inserirDepartamento("Departamento de Histï¿½ria", "DH");
+			boolean test = RCD.execute("Departamento de História", "DH");
 			assertEquals(test,true);
 		} catch (SQLException e) {
 			fail(e.getMessage());
@@ -56,7 +65,7 @@ public class TransactionScriptDepartamentoTest {
 	@Test
 	public void testAlterarDepartamento() {
 		try {
-			boolean test = TSD.alterarDepartamento(1,"Departamento de Ciencia da Computaï¿½ï¿½o", "DeCC");
+			boolean test = RAD.execute(1,"Departamento de Ciencia da Computação", "DeCC");
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -65,7 +74,7 @@ public class TransactionScriptDepartamentoTest {
 
 	@Test
 	public void testGetDepartamento() {
-		boolean test = TSD.getDepartamento(2) instanceof Departamento;
+		boolean test = RBD.execute(2) instanceof Departamento;
 		assertEquals(test,true);
 	}
 

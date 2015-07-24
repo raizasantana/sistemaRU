@@ -16,8 +16,6 @@ import br.ccomp.transactions.RoteiroBuscaCurso;
 import br.ccomp.transactions.RoteiroCriaCurso;
 import br.ccomp.transactions.RoteiroListaCurso;
 import br.ccomp.transactions.RoteiroListaDepartamento;
-import br.ccomp.transactions.TransactionScriptCurso;
-import br.ccomp.transactions.TransactionScriptDepartamento;
 
 @WebServlet("/curso")
 public class ServletCurso extends HttpServlet{
@@ -134,10 +132,9 @@ public class ServletCurso extends HttpServlet{
 		String nome = (String) request.getParameter("nome");
 		String sigla = (String) request.getParameter("sigla");
 		int idDepartamento = Integer.parseInt(request.getParameter("departamentos"));
-		
-		
+	
 		RoteiroAtualizaCurso atualizaCurso = new RoteiroAtualizaCurso();
-		
+	
 		String message = null;
 		
 		try{
@@ -166,9 +163,9 @@ public class ServletCurso extends HttpServlet{
 	}
 	
 	private void carregarCriarCurso(HttpServletRequest request, HttpServletResponse response){
-		TransactionScriptDepartamento transactionScriptDepartamento = new TransactionScriptDepartamento();
+		RoteiroListaDepartamento RLD = new RoteiroListaDepartamento();
 		
-		ArrayList<Departamento> departamentos = transactionScriptDepartamento.listarDepartamentos();
+		ArrayList<Departamento> departamentos = RLD.execute();
 		request.setAttribute("departamentos", departamentos);
 		
 		try {
