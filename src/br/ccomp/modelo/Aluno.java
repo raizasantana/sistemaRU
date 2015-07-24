@@ -19,6 +19,14 @@ public class Aluno extends Consumidor{
 		this.curso = curso;
 	}
 	
+	@Override
+	public float getValor(Turno t){
+		if(t.getNome() == "MANHA")
+			return 0.5f;
+		else
+			return 1.0f;
+			
+	}
 	
 
 }

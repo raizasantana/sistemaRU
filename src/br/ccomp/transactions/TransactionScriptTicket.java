@@ -20,7 +20,7 @@ public class TransactionScriptTicket {
 		float valor = 0f;
 		
 		if(consumidor == null)
-			throw new Exception("Consumidor não encontrado para a matrícula");
+			throw new Exception("Consumidor nï¿½o encontrado para a matrï¿½cula");
 		
 		if(refeicao.getTurno() == Turno.MANHA && consumidor.getClass().getName().equals("br.ccomp.modelo.Aluno"))
 			valor = 0.5f;
@@ -31,6 +31,7 @@ public class TransactionScriptTicket {
 		else if(consumidor.getClass().getName().equals("br.ccomp.modelo.Funcionario"))
 			valor = 6f;
 		
+	//	valor = consumidor.getValor(refeicao.getTurno());
 		
 		boolean isPago = pago == 1 ? true : false;
 		return ticketGateway.insert(consumidor.getId(), valor, refeicao.getId(), isPago);
@@ -43,7 +44,7 @@ public class TransactionScriptTicket {
 	public Ticket getTicket(int id) throws Exception{
 		Ticket ticket = ticketGateway.find(id); 
 		if(ticket == null)
-			throw new Exception("Ticket não encontrado");
+			throw new Exception("Ticket nï¿½o encontrado");
 		
 		return ticket;
 	}

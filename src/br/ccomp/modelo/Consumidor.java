@@ -96,6 +96,10 @@ public class Consumidor {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public float getValor(Turno t){
+		return 0f;
+	}
 
 
 

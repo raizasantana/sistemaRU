@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import br.ccomp.modelo.Refeicao;
 import br.ccomp.modelo.TipoRefeicao;
 import br.ccomp.modelo.Turno;
+import br.ccomp.transactions.RoteiroAtualizaRefeicao;
+import br.ccomp.transactions.RoteiroBuscarRefeicao;
+import br.ccomp.transactions.RoteiroCriaRefeicao;
+import br.ccomp.transactions.RoteiroListaRefeicao;
 import br.ccomp.transactions.TransactionScriptRefeicao;
 
 @WebServlet("/refeicao")
@@ -82,8 +86,8 @@ public class ServletRefeicao extends HttpServlet{
 			tipo = TipoRefeicao.DESJEJUM;
 		if(tipoString.equals(TipoRefeicao.ALMOCO.getNome()))
 			tipo = TipoRefeicao.ALMOCO;
-		if(tipoString.equals(TipoRefeicao.JANTA.getNome()))
-			tipo = TipoRefeicao.JANTA;
+		if(tipoString.equals(TipoRefeicao.JANTAR.getNome()))
+			tipo = TipoRefeicao.JANTAR;
 		
 		Turno turno = null;
 		if(request.getParameter("turnos").equals(Turno.MANHA.getNome()))
@@ -95,12 +99,13 @@ public class ServletRefeicao extends HttpServlet{
 		
 		String message = null;
 		
-		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
+		
+		RoteiroCriaRefeicao criaRefeicao = new RoteiroCriaRefeicao();
 		try {
-			if (transactionScriptRefeicao.inserirRefeicao(descricao, opcaoVegetariana, tipo, turno))
+			if (criaRefeicao.execute(descricao, opcaoVegetariana, tipo, turno))
 				message = "Inserido com sucesso";
 			else
-				message = "Refeicao n�o pode ser cadastrada";
+				message = "Refeicao nao pode ser cadastrada";
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
@@ -113,8 +118,9 @@ public class ServletRefeicao extends HttpServlet{
 	private void editarRefeicao(HttpServletRequest request, HttpServletResponse response){
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		TransactionScriptRefeicao tsr = new TransactionScriptRefeicao();
-		Refeicao refeicao = tsr.recuperarRefeicao(id);
+		
+		RoteiroBuscarRefeicao buscaRefeicao = new RoteiroBuscarRefeicao();
+		Refeicao refeicao = buscaRefeicao.execute(id);
 		
 		try {
 			request.setAttribute("refeicao_id", refeicao.getId());
@@ -129,9 +135,10 @@ public class ServletRefeicao extends HttpServlet{
 	}
 
 	private void listarRefeicao(HttpServletRequest request, HttpServletResponse response){
-		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
 		
-		ArrayList<Refeicao> refeicoes = transactionScriptRefeicao.listarRefeicao();
+		RoteiroListaRefeicao listarRefeicao = new RoteiroListaRefeicao();
+		
+		ArrayList<Refeicao> refeicoes = listarRefeicao.execute();
 		request.setAttribute("refeicoes", refeicoes);
 		
 		try {
@@ -151,7 +158,7 @@ public class ServletRefeicao extends HttpServlet{
 		ArrayList<String> tipos = new ArrayList<String>(); 
 		tipos.add(TipoRefeicao.DESJEJUM.getNome());
 		tipos.add(TipoRefeicao.ALMOCO.getNome());
-		tipos.add(TipoRefeicao.JANTA.getNome());
+		tipos.add(TipoRefeicao.JANTAR.getNome());
 		request.setAttribute("tipos", tipos);
 	
 		
@@ -167,12 +174,13 @@ public class ServletRefeicao extends HttpServlet{
 		String descricao = (String) request.getParameter("descricao");
 		String opVegan = (String) request.getParameter("opVegan");
 				
-		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
+		
+		RoteiroAtualizaRefeicao atualizarRefeicao = new RoteiroAtualizaRefeicao();
 		
 		String message = null;
 		
 		try{
-			transactionScriptRefeicao.alterarRefeicao(id, descricao, opVegan);
+			atualizarRefeicao.execute(id, descricao, opVegan);
 			message = "Alterado com sucesso";
 		} catch (Exception e) {
 			message = e.getMessage();

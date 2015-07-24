@@ -13,6 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import br.ccomp.modelo.Consumidor;
 import br.ccomp.modelo.Refeicao;
 import br.ccomp.modelo.Ticket;
+import br.ccomp.transactions.RoteiroAtualizarTicket;
+import br.ccomp.transactions.RoteiroBuscaConsumidor;
+import br.ccomp.transactions.RoteiroBuscaConsumidorMatricula;
+import br.ccomp.transactions.RoteiroBuscaTicket;
+import br.ccomp.transactions.RoteiroBuscarRefeicao;
+import br.ccomp.transactions.RoteiroCriarTicket;
+import br.ccomp.transactions.RoteiroListaRefeicao;
+import br.ccomp.transactions.RoteiroListarTicket;
 import br.ccomp.transactions.TransactionScriptConsumidor;
 import br.ccomp.transactions.TransactionScriptRefeicao;
 import br.ccomp.transactions.TransactionScriptTicket;
@@ -75,12 +83,13 @@ public class ServletTicket extends HttpServlet {
 	}
 	
 	private void carregarCriarTicket(HttpServletRequest request, HttpServletResponse response) {
-		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
+			
+		RoteiroListaRefeicao listaRefeicao = new RoteiroListaRefeicao();
 		
 		ArrayList<Refeicao> refeicoes = new ArrayList<Refeicao>();
 		
 		try {
-			refeicoes = transactionScriptRefeicao.listarRefeicao();
+			refeicoes = listaRefeicao.execute();
 		} catch (Exception e) {
 		}
 		
@@ -95,12 +104,14 @@ public class ServletTicket extends HttpServlet {
 	}
 
 	private void listarTicket(HttpServletRequest request, HttpServletResponse response) {
-		TransactionScriptTicket transactionScriptTicket = new TransactionScriptTicket();
+		
+		
+		RoteiroListarTicket listaTicket = new RoteiroListarTicket();
 		
 		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 		
 		try {
-			tickets = transactionScriptTicket.listarTickets();
+			tickets = listaTicket.execute();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -118,11 +129,12 @@ public class ServletTicket extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		int pago = Integer.parseInt(request.getParameter("pago"));
 		
-		TransactionScriptTicket transactionScriptTicket = new TransactionScriptTicket();
+			
+		RoteiroAtualizarTicket atualizaTicket = new RoteiroAtualizarTicket();
 		
 		boolean pago_b = pago == 1 ? true : false;
 		try {
-			transactionScriptTicket.alterarTicket(id, pago_b);
+			atualizaTicket.execute(id, pago_b);
 			String message = "Alterado com sucesso";
 			
 			request.setAttribute("response", message);
@@ -139,14 +151,17 @@ public class ServletTicket extends HttpServlet {
 		TransactionScriptTicket transactionScriptTicket = new TransactionScriptTicket();
 		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
 		
+		RoteiroBuscaTicket buscaTicket = new RoteiroBuscaTicket();
+		RoteiroBuscarRefeicao buscaRefeicao = new RoteiroBuscarRefeicao();
+		
 		Refeicao refeicao = null;
 		String message = null;
 		int matricula;
 		int pago;
 		try {
-			Ticket tkt = transactionScriptTicket.getTicket(id);
+			Ticket tkt = buscaTicket.execute(id);
 			int ref_id = tkt.getRefeicao().getId();
-			refeicao = transactionScriptRefeicao.recuperarRefeicao(ref_id);
+			refeicao = buscaRefeicao.execute(ref_id);
 			matricula = tkt.getConsumidor().getMatricula();
 			pago = tkt.getPago() ? 1 : 0;
 			
@@ -175,15 +190,16 @@ public class ServletTicket extends HttpServlet {
 		
 		String message = null;
 		
-		TransactionScriptTicket transactionScriptTicket = new TransactionScriptTicket();
-		TransactionScriptConsumidor transactionScriptConsumidor = new TransactionScriptConsumidor();
-		TransactionScriptRefeicao transactionScriptRefeicao = new TransactionScriptRefeicao();
+
+		RoteiroCriarTicket criaTicket = new RoteiroCriarTicket();
+		RoteiroBuscarRefeicao buscaRefeicao = new RoteiroBuscarRefeicao();
+		RoteiroBuscaConsumidorMatricula buscaConsMatricula =  new RoteiroBuscaConsumidorMatricula();
 		
 		try{
-			Consumidor consumidor = transactionScriptConsumidor.getConsumidorMatricula(matricula);
-			Refeicao refeicao = transactionScriptRefeicao.recuperarRefeicao(idRefeicao);
+			Consumidor consumidor = buscaConsMatricula.execute(matricula);
+			Refeicao refeicao = buscaRefeicao.execute(idRefeicao);
 			
-			transactionScriptTicket.inserirTicket(consumidor, refeicao, pago);
+			criaTicket.execute(consumidor, refeicao, pago);
 			
 			message = "Ticket criado com sucesso";
 		} catch (Exception e) {

@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.ccomp.modelo.Departamento;
+import br.ccomp.transactions.RoteiroAtualizarDepartamento;
+import br.ccomp.transactions.RoteiroBuscaDepartamento;
+import br.ccomp.transactions.RoteiroCriaDepartamento;
+import br.ccomp.transactions.RoteiroListaDepartamento;
 import br.ccomp.transactions.TransactionScriptDepartamento;
 
 @WebServlet("/departamento")
@@ -69,22 +73,19 @@ public class ServletDepartamento extends HttpServlet{
 		
 		String message = null;
 		
-		TransactionScriptDepartamento transactionScriptDepartamento = new TransactionScriptDepartamento();
+		
+		RoteiroCriaDepartamento criaDepartamento = new RoteiroCriaDepartamento();
 		
 		try{
-			transactionScriptDepartamento.inserirDepartamento(nome, sigla);
+			criaDepartamento.execute(nome, sigla);
 			message = "Inserido com sucesso";
 		}catch (Exception e){
 			message = e.getMessage();
 		}
 			
-		request.setAttribute("message", message);
+		request.setAttribute("response", message);
 		
-		try {
-			request.getRequestDispatcher("criarDepartamento.jsp").forward(request, response);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
+		listarDepartamento(request, response);
 	}
 	
 	private void alterarDepartamento(HttpServletRequest request, HttpServletResponse response){
@@ -92,18 +93,18 @@ public class ServletDepartamento extends HttpServlet{
 		String nome = (String) request.getParameter("nome");
 		String sigla = (String) request.getParameter("sigla");
 		
-		TransactionScriptDepartamento transactionScriptDepartamento = new TransactionScriptDepartamento();
+		RoteiroAtualizarDepartamento atualizarDepartamento = new RoteiroAtualizarDepartamento();
 		
 		String message = null;
 		
 		try{
-			transactionScriptDepartamento.alterarDepartamento(id, nome, sigla);
+			atualizarDepartamento.execute(id, nome, sigla);
 			message = "Alterado com sucesso";
 		} catch (Exception e) {
 			message = e.getMessage();
 		}
 		
-		request.setAttribute("message", message);
+		request.setAttribute("response", message);
 		
 		listarDepartamento(request,response);
 	}
@@ -111,12 +112,13 @@ public class ServletDepartamento extends HttpServlet{
 	private void editarDepartamento(HttpServletRequest request, HttpServletResponse response){
 		int id = Integer.parseInt(request.getParameter("id"));
 		
-		TransactionScriptDepartamento transactionScriptDepartamento = new TransactionScriptDepartamento();
+		
+		RoteiroBuscaDepartamento buscaDepartamento = new RoteiroBuscaDepartamento();
 		
 		String message = null;
 		
 		try{
-			Departamento departamento = transactionScriptDepartamento.getDepartamento(id);
+			Departamento departamento = buscaDepartamento.execute(id);
 			
 			request.setAttribute("message", message);
 			request.setAttribute("departamento_id", departamento.getId());
@@ -134,9 +136,10 @@ public class ServletDepartamento extends HttpServlet{
 	}
 
 	private void listarDepartamento(HttpServletRequest request, HttpServletResponse response){
-		TransactionScriptDepartamento transactionScriptDepartamento = new TransactionScriptDepartamento();
+			
+		RoteiroListaDepartamento listaDepartamento = new RoteiroListaDepartamento();
 		
-		ArrayList<Departamento> departamentos = transactionScriptDepartamento.listarDepartamentos();
+		ArrayList<Departamento> departamentos = listaDepartamento.execute();
 		request.setAttribute("departamentos", departamentos);
 		
 		try {

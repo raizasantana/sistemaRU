@@ -4,7 +4,7 @@ public enum TipoRefeicao {
 
 	DESJEJUM,
 	ALMOCO,
-	JANTA;
+	JANTAR;
 	
 	public String getNome(){
 		return this.name();

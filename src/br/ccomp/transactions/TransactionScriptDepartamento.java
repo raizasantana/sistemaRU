@@ -13,6 +13,13 @@ private DepartamentoGateway departamentoGateway;
 		departamentoGateway = new DepartamentoGateway();
 	}
 	
+	public Object execute(String acao){
+		//switch pra acao 
+		
+		// return ou null pras transactions de insert que nao possuem retorno ou um Departamento pros de get ou uma lista pro de listar 
+		return null;
+	}
+	
 	public ArrayList<Departamento> listarDepartamentos(){
 		ArrayList<Departamento> departamentos = null;
 		try {
@@ -35,9 +42,9 @@ private DepartamentoGateway departamentoGateway;
 	
 	public boolean alterarDepartamento(int id, String nome, String sigla) throws Exception {
 		if(nome.equals("") || sigla.equals(""))
-			throw new Exception("Dados inválidos");
+			throw new Exception("Dados invï¿½lidos");
 		if(departamentoGateway.find(sigla, id))
-			throw new Exception("Departamento de mesma sigla já cadastrado");
+			throw new Exception("Departamento de mesma sigla jï¿½ cadastrado");
 		
 		departamentoGateway.update(id, nome, sigla);
 		return true;
