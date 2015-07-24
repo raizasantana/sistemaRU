@@ -1,4 +1,4 @@
-package br.ccomp.transactionTests;
+package br.ccomp.testes.testesFuncionais;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -30,8 +30,8 @@ public class TransactionScriptRefeicaoTest {
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSR.alterarRefeicao(1, "Pão de Sal", "");
-		String sql = "DELETE FROM REFEICAO WHERE descricao = 'Pão com Manteiga'";
+		TSR.alterarRefeicao(1, "Pï¿½o de Sal", "");
+		String sql = "DELETE FROM REFEICAO WHERE descricao = 'Pï¿½o com Manteiga'";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
 		
@@ -42,7 +42,7 @@ public class TransactionScriptRefeicaoTest {
 	@Test
 	public void testInserirRefeicao() {
 		try {
-			boolean test = TSR.inserirRefeicao("Pão com Manteiga", "", TipoRefeicao.DESJEJUM, Turno.MANHA);
+			boolean test = TSR.inserirRefeicao("Pï¿½o com Manteiga", "", TipoRefeicao.DESJEJUM, Turno.MANHA);
 			assertEquals(test,true);
 		} catch (SQLException e) {
 			fail(e.getMessage());
@@ -64,7 +64,7 @@ public class TransactionScriptRefeicaoTest {
 	@Test
 	public void testAlterarRefeicao() {
 		try {
-			boolean test = TSR.alterarRefeicao(1, "Pão sem Sal", "Agua");
+			boolean test = TSR.alterarRefeicao(1, "Pï¿½o sem Sal", "Agua");
 			assertEquals(test,true);
 		} catch (SQLException e) {
 			fail(e.getMessage());

@@ -1,4 +1,4 @@
-package dbUnitTests;
+package br.ccomp.testes.testesDBUnit;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package br.ccomp.transactionTests;
+package br.ccomp.testes.testesFuncionais;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -33,7 +33,7 @@ public class TransactionScriptTicketTest {
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSR.alterarRefeicao(1, "Pão de Sal", "");
+		TSR.alterarRefeicao(1, "Pï¿½o de Sal", "");
 		String sql = "DELETE FROM ticket WHERE id_consumidor in (SELECT id from consumidor where matricula = 54321)";
 		
 		PreparedStatement prst = con.prepareStatement(sql);

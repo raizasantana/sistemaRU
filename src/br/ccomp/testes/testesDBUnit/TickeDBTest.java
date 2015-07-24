@@ -1,4 +1,4 @@
-package dbUnitTests;
+package br.ccomp.testes.testesDBUnit;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

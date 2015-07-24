@@ -54,7 +54,7 @@ insert into REFEICAO values(2, "TARDE","REFEICAO 2", "", "ALMOCO");
 insert into REFEICAO values(3, "NOITE","REFEICAO 2", "", "JANTAR");
 
 insert into CONSUMIDOR values(1, "RAIZA", 1234, 2011, "FEMININO", "", "124355534", 1, NULL);
-insert into CONSUMIDOR values(2, "MAISA", 345, 2011, "FEMININO", "", "124355333", NULL, 1);
+insert into CONSUMIDOR values(2, "MAISA", 345, 2011, "FEMININO", "MESTRADO", "124355333", NULL, 1);
 
 insert into TICKET values(1,1,1,2,1);
 insert into TICKET values(2,1,1,3,1);

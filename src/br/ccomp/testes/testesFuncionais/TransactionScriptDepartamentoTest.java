@@ -1,4 +1,4 @@
-package br.ccomp.transactionTests;
+package br.ccomp.testes.testesFuncionais;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -28,8 +28,8 @@ public class TransactionScriptDepartamentoTest {
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSD.alterarDepartamento(1,"Departamento de Ciencia da Computação", "DCC");
-		String sql = "DELETE FROM DEPARTAMENTO WHERE nome = 'Departamento de História'";
+		TSD.alterarDepartamento(1,"Departamento de Ciencia da Computaï¿½ï¿½o", "DCC");
+		String sql = "DELETE FROM DEPARTAMENTO WHERE nome = 'Departamento de Histï¿½ria'";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
 		
@@ -46,7 +46,7 @@ public class TransactionScriptDepartamentoTest {
 	@Test
 	public void testInserirDepartamento() {
 		try {
-			boolean test = TSD.inserirDepartamento("Departamento de História", "DH");
+			boolean test = TSD.inserirDepartamento("Departamento de Histï¿½ria", "DH");
 			assertEquals(test,true);
 		} catch (SQLException e) {
 			fail(e.getMessage());
@@ -56,7 +56,7 @@ public class TransactionScriptDepartamentoTest {
 	@Test
 	public void testAlterarDepartamento() {
 		try {
-			boolean test = TSD.alterarDepartamento(1,"Departamento de Ciencia da Computação", "DeCC");
+			boolean test = TSD.alterarDepartamento(1,"Departamento de Ciencia da Computaï¿½ï¿½o", "DeCC");
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());

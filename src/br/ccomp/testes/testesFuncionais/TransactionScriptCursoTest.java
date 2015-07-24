@@ -1,4 +1,4 @@
-package br.ccomp.transactionTests;
+package br.ccomp.testes.testesFuncionais;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -27,7 +27,7 @@ public class TransactionScriptCursoTest {
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TSC.alterarCurso(1,"Ciencia da Computação", "CComp", 1);
+		TSC.alterarCurso(1,"Ciencia da Computacaoo", "CComp", 1);
 		String sql = "DELETE FROM CURSO WHERE nome = 'RandomStuff'";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
