@@ -38,6 +38,9 @@
 					
 				</div>
 				
+				<div id="dialogo" title="Mensagem">
+					
+				</div>
 				
 				<hr width="100%" />
 				

@@ -1,10 +1,23 @@
 $(document).ready(function(){
 	$("#system_subnav").hide();
+	$("#dialogo").html("");
 	
 	var hash = window.location.hash;
 	if(hash.substring(1,6) == "redir"){
+		$("#dialogo").dialog({
+			autoOpen: false,
+			show: {
+				effect: "blind",
+				duration: 100
+			},
+			hide: {
+				effect: "blind",
+				duration: 100
+			}
+		});
 		myload(hash.substring(7,hash.indexOf("&"))+"?acao=Listar");
-		alert(hash.substring(hash.indexOf("&")+9,hash.length));
+		$("#dialogo").html(hash.substring(hash.indexOf("&")+9,hash.length));
+		$("#dialogo").dialog("open")
 		window.location.hash = "";
 	}
 	
