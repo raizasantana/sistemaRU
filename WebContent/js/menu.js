@@ -13,10 +13,11 @@ $(document).ready(function(){
 			hide: {
 				effect: "blind",
 				duration: 100
-			}
+			},
+			height: 100
 		});
 		myload(hash.substring(7,hash.indexOf("&"))+"?acao=Listar");
-		$("#dialogo").html(hash.substring(hash.indexOf("&")+9,hash.length));
+		$("#dialogo").html("<center>"+hash.substring(hash.indexOf("&")+9,hash.length)+"</center>");
 		$("#dialogo").dialog("open")
 		window.location.hash = "";
 	}
