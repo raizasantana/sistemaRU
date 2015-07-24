@@ -1,4 +1,4 @@
-package br.ccomp.transactionTests;
+package br.ccomp.testes.testesFuncionais;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -47,7 +47,7 @@ public class TransactionScriptConsumidorTest {
 
 	@Test
 	public void testCriarAluno() {
-		boolean test = TSC.criarAluno(1, "jorandom", "50840922833", 123456, 2005, "MASCULINO");
+		boolean test = TSC.criarAluno(1, "jorandom", "50840922833", 22, 2005, "MASCULINO");
 		assertEquals(test,true);
 	}
 
@@ -93,7 +93,7 @@ public class TransactionScriptConsumidorTest {
 
 	@Test
 	public void testGetConsumidorMatricula() {
-		boolean test = TSC.getConsumidorMatricula(12345) instanceof Consumidor;
+		boolean test = TSC.getConsumidorMatricula(1234) instanceof Consumidor;
 		assertEquals(test,true);
 	}
 

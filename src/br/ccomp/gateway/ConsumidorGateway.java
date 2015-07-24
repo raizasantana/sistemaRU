@@ -19,7 +19,7 @@ public class ConsumidorGateway {
 	Connection con = ConnectionFactory.getConnection();
 	
 	public boolean  insertFuncionario(int departamento, String nome, String cpf, String titulo, int matricula, int anoIngresso, String sexo){
-		String sql = "INSERT INTO consumidor (nome, cpf, matricula, sexo, ano_ingresso, titulo, id_departamento)" +
+		String sql = "INSERT INTO CONSUMIDOR (nome, cpf, matricula, sexo, ano_ingresso, titulo, id_departamento)" +
 				"VALUES (?,?,?,?,?,?,?)";
 		
 		try {
@@ -44,7 +44,7 @@ public class ConsumidorGateway {
 	}
 	
 	public boolean insertAluno(int curso, String nome,String cpf,int matricula, int anoIngresso, String sexo){
-		String sql = "INSERT INTO consumidor(nome, cpf, matricula, sexo, ano_ingresso, id_curso) " +
+		String sql = "INSERT INTO CONSUMIDOR(nome, cpf, matricula, sexo, ano_ingresso, id_curso) " +
 				"VALUES (?,?,?,?,?,?)";
 		
 		try {
@@ -68,7 +68,7 @@ public class ConsumidorGateway {
 	}
 	
 	public boolean delete(Integer idConsumidor) {
-		String sql = "DELETE FROM consumidor" +
+		String sql = "DELETE FROM CONSUMIDOR" +
 				"WHERE id = ?";
 		try {
 			PreparedStatement prst = con.prepareStatement(sql);
@@ -86,8 +86,8 @@ public class ConsumidorGateway {
 		ArrayList<Consumidor> cons = new ArrayList<Consumidor>();
 		Connection conn = null;
 		
-		String sql = 	"select c.*, d.*, cu.* from consumidor c left join curso cu on (c.id_curso = cu.id) " +
-						" left join departamento d on (d.id = c.id_departamento)";
+		String sql = 	"select c.*, d.*, cu.* from CONSUMIDOR c left join CURSO cu on (c.id_curso = cu.id) " +
+						" left join DEPARTAMENTO d on (d.id = c.id_departamento)";
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -154,7 +154,7 @@ public class ConsumidorGateway {
 	}
 	
 	public Consumidor findByMatricula(Integer matricula) throws SQLException {
-		String sql = "SELECT * FROM consumidor " +
+		String sql = "SELECT * FROM CONSUMIDOR " +
 				"WHERE matricula = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -175,8 +175,8 @@ public class ConsumidorGateway {
 	}
 	
 	public Consumidor find(Integer id) throws SQLException {
-		String sql = 	"select cu.sigla, d.sigla, c.* from consumidor c left join curso cu on (c.id_curso = cu.id)" + 
-						" left join departamento d on (d.id = c.id_departamento)" +
+		String sql = 	"select cu.sigla, d.sigla, c.* from CONSUMIDOR c left join CURSO cu on (c.id_curso = cu.id)" + 
+						" left join DEPARTAMENTO d on (d.id = c.id_departamento)" +
 						" WHERE c.id = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -234,7 +234,7 @@ public class ConsumidorGateway {
 	public boolean findbyCpf(String cpf) throws SQLException {
 		boolean achou = false;
 		
-		String sql = "SELECT * FROM consumidor " +
+		String sql = "SELECT * FROM CONSUMIDOR " +
 				"WHERE cpf = ?";
 
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -253,7 +253,7 @@ public class ConsumidorGateway {
 	}
 	
 	public void update(Integer id, int anoIngresso, int matricula, String nome, String sexo) throws SQLException {
-		String sql = "update consumidor set ano_ingresso = ?, matricula = ?, nome = ?, sexo = ? where id = ?";
+		String sql = "update CONSUMIDOR set ano_ingresso = ?, matricula = ?, nome = ?, sexo = ? where id = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1,anoIngresso);

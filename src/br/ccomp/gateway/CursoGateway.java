@@ -14,7 +14,7 @@ public class CursoGateway {
 	Connection con = ConnectionFactory.getConnection();
 	
 	public void insert(String nome, String sigla, Integer idDept){
-		String sql = "INSERT INTO curso(nome, sigla, id_departamento) " +
+		String sql = "INSERT INTO CURSO(nome, sigla, id_departamento) " +
 				"VALUES (?,?,?)";
 		
 		try {
@@ -33,7 +33,7 @@ public class CursoGateway {
 	}
 	
 	public void delete(Integer idCurso) throws SQLException{
-		String sql = "DELETE FROM curso " +
+		String sql = "DELETE FROM CURSO " +
 				"WHERE id = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class CursoGateway {
 	}
 
 	public Curso find(Integer id) throws SQLException{
-		String sql = "SELECT * FROM curso " +
+		String sql = "SELECT * FROM CURSO " +
 				"WHERE id = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class CursoGateway {
 	
 	//TODO Identificar pq o executeQuery diz que a sintax ta errada e fazer o select funcionar
 	public boolean find(String sigla) throws SQLException{
-		String sql = "SELECT * FROM curso " +
+		String sql = "SELECT * FROM CURSO " +
 				"WHERE sigla = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -138,7 +138,7 @@ public class CursoGateway {
 	}
 	
 	public boolean find(int id, String sigla) throws SQLException{
-		String sql = "SELECT * FROM curso " +
+		String sql = "SELECT * FROM CURSO " +
 				"WHERE sigla = ? AND id != ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);

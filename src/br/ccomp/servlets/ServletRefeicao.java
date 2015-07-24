@@ -82,8 +82,8 @@ public class ServletRefeicao extends HttpServlet{
 			tipo = TipoRefeicao.DESJEJUM;
 		if(tipoString.equals(TipoRefeicao.ALMOCO.getNome()))
 			tipo = TipoRefeicao.ALMOCO;
-		if(tipoString.equals(TipoRefeicao.JANTA.getNome()))
-			tipo = TipoRefeicao.JANTA;
+		if(tipoString.equals(TipoRefeicao.JANTAR.getNome()))
+			tipo = TipoRefeicao.JANTAR;
 		
 		Turno turno = null;
 		if(request.getParameter("turnos").equals(Turno.MANHA.getNome()))
@@ -151,7 +151,7 @@ public class ServletRefeicao extends HttpServlet{
 		ArrayList<String> tipos = new ArrayList<String>(); 
 		tipos.add(TipoRefeicao.DESJEJUM.getNome());
 		tipos.add(TipoRefeicao.ALMOCO.getNome());
-		tipos.add(TipoRefeicao.JANTA.getNome());
+		tipos.add(TipoRefeicao.JANTAR.getNome());
 		request.setAttribute("tipos", tipos);
 	
 		

@@ -15,7 +15,7 @@ public class TicketGateway {
 	Connection con = ConnectionFactory.getConnection();
 	
 	public boolean insert(Integer idConsumidor, Float valor, Integer idRefeicao, Boolean pago) throws SQLException{
-		String sql = "INSERT INTO ticket (id_consumidor, valor, id_refeicao, pago) " +
+		String sql = "INSERT INTO TICKET (id_consumidor, valor, id_refeicao, pago) " +
 				"VALUES (?,?,?,?)";
 		
 		try {
@@ -59,7 +59,7 @@ public class TicketGateway {
 	
 	public ArrayList<Ticket> findAll() throws SQLException{
 		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-		String sql = "SELECT * FROM ticket t, refeicao r, consumidor c " +
+		String sql = "SELECT * FROM TICKET t, refeicao r, consumidor c " +
 				"WHERE t.id_refeicao = r.id AND t.id_consumidor = c.id";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -95,7 +95,7 @@ public class TicketGateway {
 	
 	public ArrayList<Ticket> findAll(int matriculaConsumidor) throws SQLException{
 		ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-		String sql = "SELECT * FROM ticket t, refeicao r, consumidor c " +
+		String sql = "SELECT * FROM TICKET t, refeicao r, consumidor c " +
 				"WHERE t.id_refeicao = r.id AND t.id_consumidor = c.id AND c.matricula = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -131,7 +131,7 @@ public class TicketGateway {
 	}
 
 	public Ticket find(Integer id) throws SQLException{
-		String sql = "SELECT * FROM ticket t, refeicao r, consumidor c " +
+		String sql = "SELECT * FROM TICKET t, refeicao r, consumidor c " +
 				"WHERE t.id = ? AND t.id_refeicao = r.id AND t.id_consumidor = c.id";
 		
 		PreparedStatement prst = con.prepareStatement(sql);

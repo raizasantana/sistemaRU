@@ -15,7 +15,7 @@ public class RefeicaoGateway {
 Connection con = ConnectionFactory.getConnection();
 	
 	public boolean insert(String turno, String descricao, String opVegan, String tipo) throws SQLException{
-		String sql = "INSERT INTO refeicao (turno, descricao, opcao_vegetariana, tipo) " +
+		String sql = "INSERT INTO REFEICAO (turno, descricao, opcao_vegetariana, tipo) " +
 				"VALUES (?,?,?,?)";
 		
 		try {
@@ -40,7 +40,7 @@ Connection con = ConnectionFactory.getConnection();
 		ArrayList<Refeicao> refeicoes = new ArrayList<Refeicao>();
 		Connection conn = null;
 		
-		String sql = "SELECT * FROM refeicao";
+		String sql = "SELECT * FROM REFEICAO";
 				
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -72,7 +72,7 @@ Connection con = ConnectionFactory.getConnection();
 		Refeicao refeicao = new Refeicao();
 		Connection conn = null;
 		
-		String sql = "SELECT * FROM refeicao WHERE id = ?";
+		String sql = "SELECT * FROM REFEICAO WHERE id = ?";
 				
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -102,7 +102,7 @@ Connection con = ConnectionFactory.getConnection();
 	}
 	
 	public boolean update(int id, String descricao, String opVegan) throws SQLException{
-		String sql = "UPDATE refeicao SET descricao = ?, opcao_vegetariana = ? WHERE ID = ?";
+		String sql = "UPDATE REFEICAO SET descricao = ?, opcao_vegetariana = ? WHERE ID = ?";
 		
 		try {
 			PreparedStatement prst = con.prepareStatement(sql);

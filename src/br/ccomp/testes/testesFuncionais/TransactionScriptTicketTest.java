@@ -1,4 +1,4 @@
-package br.ccomp.transactionTests;
+package br.ccomp.testes.testesFuncionais;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -33,7 +33,7 @@ public class TransactionScriptTicketTest {
 	@After
 	public void tearDown() throws Exception {
 		Connection con = ConnectionFactory.getConnection();
-		TST.alterarTicket(1,true);
+		TSR.alterarRefeicao(1, "P�o de Sal", "");
 		String sql = "DELETE FROM ticket WHERE id_consumidor in (SELECT id from consumidor where matricula = 54321)";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -45,7 +45,7 @@ public class TransactionScriptTicketTest {
 	@Test
 	public void testInserirTicket() {
 		try {
-			boolean test = TST.inserirTicket(TSC.getConsumidorMatricula(54321), TSR.recuperarRefeicao(1), 1);
+			boolean test = TST.inserirTicket(TSC.getConsumidorMatricula(1234), TSR.recuperarRefeicao(1), 1);
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());
@@ -85,7 +85,7 @@ public class TransactionScriptTicketTest {
 	@Test
 	public void testListarTicketsInt() {
 		try {
-			boolean test = TST.listarTickets(12345) instanceof ArrayList<?>;
+			boolean test = TST.listarTickets(1234) instanceof ArrayList<?>;
 			assertEquals(test,true);
 		} catch (Exception e) {
 			fail(e.getMessage());

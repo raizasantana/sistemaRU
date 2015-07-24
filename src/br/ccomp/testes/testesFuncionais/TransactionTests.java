@@ -1,4 +1,4 @@
-package br.ccomp.transactionTests;
+package br.ccomp.testes.testesFuncionais;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+	
+	<DEPARTAMENTO id="1" nome="Departamento 1" sigla="DP1"/>
+	
+	<CURSO id="1" nome="Ciencia da Computacao" sigla="CComp" id_departamento="1"/>
+
+	<REFEICAO id="1" turno="MANHA" descricao="Refeicao 1" opcao_vegetariana="" tipo="DESJEJUM"/>
+	<REFEICAO id="2" turno="TARDE" descricao="Refeicao 2" opcao_vegetariana="Opcao Vegetariana 1" tipo="ALMOCO"/>
+	<REFEICAO id="3" turno="NOITE" descricao="Refeicao 4" opcao_vegetariana="Opcao Vegetariana 1" tipo="JANTAR"/>
+	
+	<CONSUMIDOR id="1" nome="Raiza" matricula="1234" ano_ingresso="2011" sexo="FEMININO" titulo="" cpf="127328732" id_curso="1" id_departamento=""/>
+	<CONSUMIDOR id="2" nome="Renan" matricula="6366" ano_ingresso="2011" sexo="MASCULINO" titulo="" cpf="73633525628" id_curso="" id_departamento="1"/>
+	
+
+	<TICKET id="1" id_consumidor="1" valor="1" id_refeicao="2" pago="1"/>
+	<TICKET id="2" id_consumidor="1" valor="1" id_refeicao="3" pago="1"/>
+	<TICKET id="3" id_consumidor="2" valor="6" id_refeicao="3" pago="1"/>
+
+</dataset>

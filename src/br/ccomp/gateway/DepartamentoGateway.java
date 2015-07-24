@@ -13,7 +13,7 @@ public class DepartamentoGateway {
 	Connection con = ConnectionFactory.getConnection();
 	
 	public boolean insert(String nome, String sigla) throws SQLException{
-		String sql = "INSERT INTO departamento(nome, sigla) " +
+		String sql = "INSERT INTO DEPARTAMENTO(nome, sigla) " +
 				"VALUES (?,?)";
 		
 		try {
@@ -53,7 +53,7 @@ public class DepartamentoGateway {
 	}
 	
 	public void delete(Integer idDepartamento) throws SQLException{
-		String sql = "DELETE FROM departamento " +
+		String sql = "DELETE FROM DEPARTAMENTO " +
 				"WHERE id = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -93,7 +93,7 @@ public class DepartamentoGateway {
 	}
 
 	public Departamento find(Integer id) throws SQLException{
-		String sql = "SELECT * FROM departamento " +
+		String sql = "SELECT * FROM DEPARTAMENTO " +
 				"WHERE id = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -113,7 +113,7 @@ public class DepartamentoGateway {
 	}
 	
 	public boolean find(String sigla) throws SQLException{
-		String sql = "SELECT * FROM departamento " +
+		String sql = "SELECT * FROM DEPARTAMENTO " +
 				"WHERE sigla = ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);
@@ -134,7 +134,7 @@ public class DepartamentoGateway {
 	}
 	
 	public boolean find(String sigla, int id) throws SQLException{
-		String sql = "SELECT * FROM departamento " +
+		String sql = "SELECT * FROM DEPARTAMENTO " +
 				"WHERE sigla = ? AND id != ?";
 		
 		PreparedStatement prst = con.prepareStatement(sql);

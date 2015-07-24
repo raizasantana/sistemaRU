@@ -78,13 +78,9 @@ public class ServletDepartamento extends HttpServlet{
 			message = e.getMessage();
 		}
 			
-		request.setAttribute("message", message);
+		request.setAttribute("response", message);
 		
-		try {
-			request.getRequestDispatcher("criarDepartamento.jsp").forward(request, response);
-		} catch (ServletException | IOException e) {
-			e.printStackTrace();
-		}
+		listarDepartamento(request, response);
 	}
 	
 	private void alterarDepartamento(HttpServletRequest request, HttpServletResponse response){
@@ -103,7 +99,7 @@ public class ServletDepartamento extends HttpServlet{
 			message = e.getMessage();
 		}
 		
-		request.setAttribute("message", message);
+		request.setAttribute("response", message);
 		
 		listarDepartamento(request,response);
 	}
