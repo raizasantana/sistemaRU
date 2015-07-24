@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
@@ -38,25 +39,7 @@ public class CursoDBTest extends TestCase{
         cG = new CursoGateway();
     }
 
-    protected void setUp() throws Exception
-    {
-        databaseTester = new JdbcDatabaseTester("com.mysql.jdbc.Driver",
-            "jdbc:mysql://localhost:3306/bandejao", "root", "root");
-
-        // initialize your dataset here
-        IDataSet dataSet = this.getDataSet();
-        databaseTester.setDataSet( dataSet );
-    }
-
-    protected void tearDown() throws Exception
-    {
-	// will call default tearDownOperation
-        databaseTester.onTearDown();
-    }
     
-    protected IDataSet getDataSet() throws Exception {
-		return new FlatXmlDataSetBuilder().build(new FileInputStream("src/dbUnitTests/dataset.xml"));
-	}
     
     @Test
     public void testFindBySigla() throws Exception
@@ -71,6 +54,26 @@ public class CursoDBTest extends TestCase{
     	c.setId(1);
     	assertEquals(c.getId(), cG.find(1).getId());
     }
+    
+   @Test
+    public void testInsert() throws Exception
+    {
+	   cG.insert("Engenharia da Computacao","EComp" ,1);
+    	assertEquals(true, cG.find("EComp"));
+    }
+    
+   @Test
+   public void testUpdate() throws SQLException
+   {
+	   Curso c = cG.find(3);
+	   c.setSigla("ABC");
+	   cG.update(c.getId(),c.getNome(),c.getSigla(), c.getDepartamento().getId());
+	   
+	   assertEquals(true,cG.find("ABC"));
+   }
+ 
+    
+    
 	
 
 }
