@@ -191,6 +191,8 @@ public class ServletConsumidor extends HttpServlet{
 		
 		try {
 			cons.atualizarConsumidor(id, ano, matricula, nome, sexo);
+			String message = "Atualizado com Sucesso";
+			request.setAttribute("response", message);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

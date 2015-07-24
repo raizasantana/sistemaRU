@@ -8,16 +8,21 @@ $(document).ready(function(){
 			autoOpen: false,
 			show: {
 				effect: "blind",
-				duration: 100
+				duration: 300
 			},
 			hide: {
 				effect: "blind",
-				duration: 100
+				duration: 300
 			},
-			height: 100
+			buttons: {
+				Fechar: function() {
+					$( this ).dialog( "close" );
+				}
+	        },
+			height: 160
 		});
 		myload(hash.substring(7,hash.indexOf("&"))+"?acao=Listar");
-		$("#dialogo").html("<center>"+hash.substring(hash.indexOf("&")+9,hash.length)+"</center>");
+		$("#dialogo").html("<center><h3>"+hash.substring(hash.indexOf("&")+9,hash.length)+"</h3></center>");
 		$("#dialogo").dialog("open")
 		window.location.hash = "";
 	}

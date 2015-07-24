@@ -158,7 +158,7 @@ public class ServletTicket extends HttpServlet {
 			message = e.getMessage();
 		}
 		
-		request.setAttribute("response", message);
+		request.setAttribute("message", message);
 		
 		try {
 			request.getRequestDispatcher("/editarTicket.jsp").forward(request, response);
@@ -191,7 +191,6 @@ public class ServletTicket extends HttpServlet {
 		}
 		
 		request.setAttribute("response", message);
-		System.out.println("Passando: "+message);
 		
 		listarTicket(request, response);
 	}

@@ -113,7 +113,7 @@ public class ServletCurso extends HttpServlet{
 			
 		} catch (Exception e){
 			message = e.getMessage();
-			request.setAttribute("response", message);
+			request.setAttribute("message", message);
 		}
 		
 		
